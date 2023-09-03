@@ -1,8 +1,8 @@
 ---
-title: "My First Post"
-date: 2022-11-20T09:03:20-08:00
+title: "My Second Amazing Post"
+date: 2023-09-02T09:03:20-08:00
 draft: true
-tags: ["AI", "Probability"]
+tags: ["AI"]
 ---
 ## Introduction
 
