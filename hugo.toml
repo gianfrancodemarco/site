@@ -1,0 +1,4 @@
+baseURL = 'https://ainotes.com/'
+languageCode = 'en-us'
+title = 'AI Notes'
+theme = 'ananke'
