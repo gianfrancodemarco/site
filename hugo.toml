@@ -1,8 +1,7 @@
-baseURL = 'https://localhost/ainotes'
+baseURL = 'https://localhost/GrimoAIre'
 languageCode = 'en-us'
-title = 'AI Notes'
+title = 'GrimoAIre'
 theme = 'poison'
-description = "My blog for AI notes & articles."
 canonifyURLs = true
 
 [author]
@@ -11,8 +10,9 @@ canonifyURLs = true
     linkedin = "gianfranco-demarco-207288175"
 
 [params]
-    brand = "AI Notes"                      # name of your site - appears in the sidebar
+    brand = "GrimoAIre"                      # name of your site - appears in the sidebar
     brand_image = "/images/test.jpg"    # path to the image shown in the sidebar
+    description = "Traversing the AI landscape"
     dark_mode = true                      # optional - defaults to false
     # favicon = "favicon.png"             # path to favicon (defaults to favicon.png)
 
