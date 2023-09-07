@@ -4,9 +4,6 @@ title = 'GrimoAIre'
 theme = 'poison'
 canonifyURLs = true
 
-[taxonomies]
-   tag = "tags"
-
 [author]
     name = "Gianfranco Demarco"       
     github = "gianfrancodemarco"
