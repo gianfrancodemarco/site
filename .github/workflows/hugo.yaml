@@ -59,7 +59,7 @@ jobs:
           hugo \
             --gc \
             --minify \
-            --baseURL "https://www.gianfrancodemarco.dev/"          
+            --baseURL "https://gianfrancodemarco.dev/"          
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
