@@ -9,6 +9,26 @@
   transition: transform 0.5s ease, box-shadow 0.5s ease; /* Smoother transition for the transform and box shadow */
 }
 
+/* Responsive styles for smaller screens */
+@media (max-width: 1120px) {
+  .card-container {
+    flex-wrap: wrap; /* Allow cards to wrap onto a new line */
+    justify-content: space-around; /* Adjust the spacing between wrapped cards */
+  }
+
+  .card {
+    flex: 0 0 calc(40%); /* Adjust flex-basis for two cards per row */
+    max-width: calc(60%); /* Adjust max-width to account for margins */
+    min-width: 300px;
+    margin: 10px; /* Add some margin between cards */
+  }
+}
+
+.card-container {
+  display: flex;
+  justify-content: center;
+}
+
 .card img {
   max-width: 100%;
   border-radius: 8px;
@@ -16,21 +36,19 @@
 }
 
 .card:hover {
-    transform: translate(-10px, -10px); /* Move the card to the top left on hover */
-    box-shadow: 10px 10px 16px var(--light-secondary-color);
+  transform: translate(
+    -10px,
+    -10px
+  ); /* Move the card to the top left on hover */
+  box-shadow: 10px 10px 16px var(--light-secondary-color);
 }
 
 .card h2 {
-  color: var(--light-primary-color)
+  color: var(--light-primary-color);
 }
 
 .card p {
-  color: var(--light-primary-color)
-}
-
-.card-container {
-  display: flex;
-  justify-content: center;
+  color: var(--light-primary-color);
 }
 
 /* Remove all styles from a of project containers */
