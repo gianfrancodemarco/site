@@ -16,7 +16,8 @@ enableRobotsTXT = true
 
   socialIcons = [
     {name = "github", url = "https://github.com/gianfrancodemarco"},
-    {name = "linkedin", url = "https://it.linkedin.com/in/gianfranco-demarco-207288175"}
+    {name = "linkedin", url = "https://it.linkedin.com/in/gianfranco-demarco-207288175"},
+    {name = "email", url = "mailto:gianfrademarco@gmail.com"}
   ]
 
 [menu]
@@ -48,17 +49,19 @@ enableRobotsTXT = true
     identifier = "github"
     url = "https://github.com/gianfrancodemarco"
     weight = 3
-    
-    # We use feather-icons: https://feathericons.com/
     pre = "<span data-feather='github'></span>"
 
   [[menu.main]]
     identifier = "linkedin"
     url = "https://it.linkedin.com/in/gianfranco-demarco-207288175"
-    weight = 4
-    
-    # We use feather-icons: https://feathericons.com/
+    weight = 4    
     pre = "<span data-feather='linkedin'></span>"
+
+  [[menu.main]]
+    identifier = "email"
+    url = "mailto:gianfrademarco@gmail.com"
+    weight = 5
+    pre = "<span data-feather='at-sign'></span>"
 
 [markup]
   [markup.tableOfContents]
