@@ -20,6 +20,16 @@ enableRobotsTXT = true
     {name = "email", url = "mailto:gianfrademarco@gmail.com"}
   ]
 
+  projects = [
+    {name = "test", url = "www.google.com" }
+  ]
+
+  CustomHeadHTML = """
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/common.css">
+  <link rel="stylesheet" href="/css/dark.css">
+  """
+
 [menu]
   [[menu.main]]
     # Unique identifier for a menu item

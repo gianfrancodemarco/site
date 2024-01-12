@@ -1,0 +1,19 @@
+<div class="card mx-1 ">
+  <a href="{{.Params.githuburl}}" class="no-a-style" _target="blank">
+      <h2>{{.Title}}</h2>
+      <p>{{.Summary}}</p>
+  </a>
+  {{ if isset .Params "tags" }}
+  <ul class="post-tags">
+    <p>
+      {{range .Params.tags}}
+      <li class="post-tag">
+        <a href="/tags/{{ . | urlize }}/">
+          <div class="tag-name">{{ . }}</div>
+        </a>
+      </li>
+      {{end}}
+    </p>
+  </ul>
+  {{end}}
+</div>

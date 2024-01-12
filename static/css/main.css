@@ -1,0 +1,47 @@
+.card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  max-width: 300px;
+  margin: 0 15px;
+  text-align: center;
+  transition: transform 0.5s ease, box-shadow 0.5s ease; /* Smoother transition for the transform and box shadow */
+}
+
+.card img {
+  max-width: 100%;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.card:hover {
+    transform: translate(-10px, -10px); /* Move the card to the top left on hover */
+    box-shadow: 10px 10px 16px var(--light-secondary-color);
+}
+
+.card h2 {
+  color: var(--light-primary-color)
+}
+
+.card p {
+  color: var(--light-primary-color)
+}
+
+.card-container {
+  display: flex;
+  justify-content: center;
+}
+
+/* Remove all styles from a of project containers */
+.no-a-style {
+  color: inherit; /* Inherit the color from the parent element */
+  text-decoration: none; /* Remove underlines */
+  cursor: pointer; /* Set cursor to pointer on hover */
+}
+
+.no-a-style:hover {
+  color: inherit; /* Inherit the color from the parent element */
+  text-decoration: none; /* Remove underlines */
+  cursor: pointer; /* Set cursor to pointer on hover */
+}
