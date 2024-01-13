@@ -1,79 +1,125 @@
 .mx-1{
-    margin-left: 1rem;
-    margin-right: 1rem;
+    margin-left: 4px;
+    margin-right: 4px;
 }
 
 .my-1{
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    margin-top: 4px;
+    margin-bottom: 4px;
 }
 
 .mx-2{
-    margin-left: 2rem;
-    margin-right: 2rem;
+    margin-left: 8px;
+    margin-right: 8px;
 }
 
 .my-2{
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+    margin-top: 8px;
+    margin-bottom: 8px;
 }
 
 .mx-3{
-    margin-left: 3rem;
-    margin-right: 3rem;
+    margin-left: 12px;
+    margin-right: 12px;
 }
 
 .my-3{
-    margin-top: 3rem;
-    margin-bottom: 3rem;
+    margin-top: 12px;
+    margin-bottom: 12px;
 }
 
 .mx-4{
-    margin-left: 4rem;
-    margin-right: 4rem;
+    margin-left: 16px;
+    margin-right: 16px;
 }
 
 .my-4{
-    margin-top: 4rem;
-    margin-bottom: 4rem;
+    margin-top: 16px;
+    margin-bottom: 16px;
 }
 
 .mx-5{
-    margin-left: 5rem;
-    margin-right: 5rem;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 .my-5{
-    margin-top: 5rem;
-    margin-bottom: 5rem;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .mx-6{
-    margin-left: 6rem;
-    margin-right: 6rem;
+    margin-left: 24px;
+    margin-right: 24px;
 }
 
 .my-6{
-    margin-top: 6rem;
-    margin-bottom: 6rem;
+    margin-top: 24px;
+    margin-bottom: 24px;
 }
 
 .mx-7{
-    margin-left: 7rem;
-    margin-right: 7rem;
+    margin-left: 28px;
+    margin-right: 28px;
 }
 
 .my-7{
-    margin-top: 7rem;
-    margin-bottom: 7rem;
+    margin-top: 28px;
+    margin-bottom: 28px;
 }
 
 .mx-8{
-    margin-left: 8rem;
-    margin-right: 8rem;
+    margin-left: 32px;
+    margin-right: 32px;
 }
 
 .my-8{
-    margin-top: 8rem;
-    margin-bottom: 8rem;
+    margin-top: 32px;
+    margin-bottom: 32px;
+}
+
+.m-1{
+    margin: 4px;
+}
+
+.m-2{
+    margin: 8px;
+}
+
+.m-3{
+    margin: 12px;
+}
+
+.m-4{
+    margin: 16px;
+}
+
+.m-5{
+    margin: 20px;
+}
+
+.m-6{
+    margin: 24px;
+}
+
+.m-7{
+    margin: 28px;
+}
+
+.m-8{
+    margin: 32px;
+}
+
+.mx-auto{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.my-auto{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.m-auto{
+    margin: auto;
 }

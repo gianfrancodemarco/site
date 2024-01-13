@@ -1,4 +1,4 @@
-<div class="card mx-1 ">
+<div class="card m-4">
   <a href="{{.Params.githuburl}}" class="no-a-style" _target="blank">
       <h2>{{.Title}}</h2>
       <p>{{.Summary}}</p>
@@ -7,7 +7,7 @@
   <ul class="post-tags">
     <p>
       {{range .Params.tags}}
-      <li class="post-tag">
+      <li class="post-tag mx-1 my-1">
         <a href="/tags/{{ . | urlize }}/">
           <div class="tag-name">{{ . }}</div>
         </a>
