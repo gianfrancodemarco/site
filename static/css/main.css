@@ -3,8 +3,9 @@
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  width: 300px;
-  margin: 0 15px;
+  min-width: 250px;
+  max-width: 300px;
+  margin: 0 25px;
   text-align: center;
   transition: transform 0.5s ease, box-shadow 0.5s ease; /* Smoother transition for the transform and box shadow */
 }
@@ -19,8 +20,6 @@
   .card {
     flex: 0 0 calc(50%); /* Adjust flex-basis for two cards per row */
     max-width: calc(100%); /* Adjust max-width to account for margins */
-    min-width: 300px;
-    margin: 10px; /* Add some margin between cards */
   }
 }
 
