@@ -1,0 +1,11 @@
+{{ define "main" }}
+    {{ if eq .Type "page" }}
+        {{- partial "page.html" . -}}
+    {{ else if eq .Type "posts" }}
+        {{- partial "posts.html" . -}}
+    {{ else if eq .Type "projects" }}
+        {{- partial "projects.html" . -}}
+    {{ else if eq .Type "tags" }}
+        {{- partial "tag.html" . -}}
+    {{ end }}
+{{ end }}
