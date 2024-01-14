@@ -27,7 +27,6 @@ enableRobotsTXT = true
   CustomHeadHTML = """
   <link rel="stylesheet" href="/css/main.css">
   <link rel="stylesheet" href="/css/common.css">
-  <link rel="stylesheet" href="/css/dark.css">
   """
 
 [menu]
@@ -48,33 +47,39 @@ enableRobotsTXT = true
 
     # Weights are used to determine the ordering
     weight = 1
+  
+  [[menu.main]]
+    identifier = "projects"
+    name = "Projects"
+    url = "/projects/"
+    weight = 2
 
   [[menu.main]]
     identifier = "tags"
     name = "Tags"
     url = "/tags/"
-    weight = 2
+    weight = 3
     
   [[menu.main]]
     identifier = "github"
     url = "https://github.com/gianfrancodemarco"
-    weight = 3
+    weight = 4
     pre = "<span data-feather='github'></span>"
 
   [[menu.main]]
     identifier = "linkedin"
     url = "https://it.linkedin.com/in/gianfranco-demarco-207288175"
-    weight = 4    
+    weight = 5    
     pre = "<span data-feather='linkedin'></span>"
 
   [[menu.main]]
     identifier = "email"
     url = "mailto:gianfrademarco@gmail.com"
-    weight = 5
+    weight = 6
     pre = "<span data-feather='at-sign'></span>"
 
 [markup]
   [markup.tableOfContents]
     startLevel = 1
-    endLevel = 1
+    endLevel = 2
     ordered = false

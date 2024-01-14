@@ -78,6 +78,16 @@
     margin-bottom: 32px;
 }
 
+.mx-16{
+    margin-left: 64px;
+    margin-right: 64px;
+}
+
+.my-16{
+    margin-top: 64px;
+    margin-bottom: 64px;
+}
+
 .m-1{
     margin: 4px;
 }
@@ -110,6 +120,10 @@
     margin: 32px;
 }
 
+.m-16{
+    margin: 64px;
+}
+
 .mx-auto{
     margin-left: auto;
     margin-right: auto;
@@ -122,4 +136,8 @@
 
 .m-auto{
     margin: auto;
+}
+
+.mt-16{
+    margin-top: 64px;
 }

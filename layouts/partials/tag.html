@@ -1,0 +1,26 @@
+<div class="container list-posts">
+
+    <h1 class="list-title">{{ .Name }}</h1>
+
+    {{ range (where .Pages "Params.type" "post" ).GroupByDate "2006" }}
+
+    <h2 class="mt-16">Posts</h2>
+    <h3>{{ .Key }}</h2>
+
+    {{- range .Pages -}}
+        {{- partial "list-posts-flat.html" . -}}
+    {{ end }}
+    {{ end }}
+
+
+    {{ range (where .Pages "Params.type" "project" ).GroupByDate "2006" }}
+
+    <h2 class="mt-16">Projects</h2>
+    <h3>{{ .Key }}</h2>
+
+    {{- range .Pages -}}
+        {{- partial "list-projects-flat.html" . -}}
+    {{ end }}
+    {{ end }}
+    
+</div>
