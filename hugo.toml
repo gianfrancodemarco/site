@@ -10,7 +10,7 @@ enableRobotsTXT = true
 
 [params]
   avatarURL = "/images/avatar.jpg"
-  description = "Software Engineer | AI Engineer"
+  description = "Data & AI Software Engineer | M.Sc. in Artificial Intelligence"
   showPostsOnHomePage = "popular"
   footer = "Gianfranco Demarco"
 
