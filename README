@@ -1,10 +1,19 @@
 URL: [gianfrancodemarco.dev](https://gianfrancodemarco.dev)
 
-
-
 ### Start in development
 
+
+Fetch the theme:
+```bash
+git submodule update --init --recursive
+```
+
+Start the server:
 ```bash
 hugo server -D
 ```
 
+
+### Deploy
+
+Push a new version to the main branch to start a new deploy
