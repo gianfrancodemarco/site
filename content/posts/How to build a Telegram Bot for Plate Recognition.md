@@ -5,7 +5,7 @@ draft:  false
 tags: ["AI", "Computer Vision", "Project"]
 type: "post"
 truncated: true
-summary: Explore how I built a Telegram Bot for Plate Recognition, with a complete CI/CD pipeline and monitoring dashboards. 
+summary: Explore how to build a Telegram Bot for Plate Recognition, with a complete CI/CD pipeline and monitoring dashboards. 
 showTableOfContents: true
 
 ---

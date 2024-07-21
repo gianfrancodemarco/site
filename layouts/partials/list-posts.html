@@ -1,0 +1,27 @@
+<article class="post-card m-4">
+    <a href="{{ .Permalink }}" class="post-link no-a-style">
+        {{ if isset .Params "heroimage" }}
+            <div class="post-image" style="background-image: url('{{ .Params.heroImage }}');"></div>
+        {{ end }}
+        <div class="p-4">
+            <h2 class="post-title m-0">{{ .Title }}</h2>
+            <div class="flex-break"></div>
+            <span class="post-date">{{ dateFormat (or .Site.Params.dateFormat "January 2, 2006") .Date}}</span>
+            <div class="my-2">{{ .Params.summary }}</div>
+        </div>
+    </a>
+    {{ if isset .Params "tags" }}
+        <ul class="post-tags pl-2">
+        <span>
+            {{range .Params.tags}}
+            <li class="post-tag mx-1 my-1">
+            <a href="/tags/{{ . | urlize }}/">
+                <div class="tag-name">{{ . }}</div>
+            </a>
+            </li>
+            {{end}}
+        </p>
+        </ul>
+    {{end}}
+  
+</article>
