@@ -2,7 +2,7 @@
 title: "How to build a Telegram Bot for Plate Recognition"
 date:  2023-09-07T15:30:00
 draft:  false
-tags: ["AI", "Computer Vision", "Project"]
+tags: ["AI", "Computer Vision", "Python", "Grafana", "MLflow", "Telegram"]
 type: "post"
 truncated: true
 summary: Explore how to build a Telegram Bot for Plate Recognition, with a complete CI/CD pipeline and monitoring dashboards. 
