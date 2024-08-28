@@ -12,7 +12,7 @@ showTableOfContents: true
 ---
 
 # Introduction
-Since their introduction, [tools](https://python.langchain.com/v0.1/docs/modules/tools/) tools have significantly expanded the capabilities of LLMs. 
+Since their introduction, [tools](https://python.langchain.com/v0.1/docs/modules/tools/) have significantly expanded the capabilities of LLMs. 
 The ability to execute arbitrary code, placing the burden on the LLM to determine when to call a tool and the parameters to use, enabled many real-life applications.
 
 However, stateless conversations coerce LLMs to only rely on conversation history to manage tool calls.
@@ -172,7 +172,7 @@ There must be a better way.
 # Meet Converso
 
 [**Converso**](https://github.com/gianfrancodemarco/converso) is a LangChain extension that introduces *statefulness* to better guide the LLM through the data acquisition process for more complex tools.
-Practically, it defines **FormTool**s, which derive from LangChain tools, and the *FormAgentExecutor*, a LangGraph implementation capable of managing standard LangChain tools, FormTools and error correction.
+Practically, it defines **FormTool**s, which derive from LangChain tools, and the **FormAgentExecutor**, a LangGraph implementation capable of managing standard LangChain tools, FormTools and error correction.
 
 With FormTools, the LLM:
 - actively guides the user toward the completion of the action
