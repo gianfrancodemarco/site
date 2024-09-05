@@ -6,7 +6,7 @@ tags: ["AI", "Python", "LangChain", "LLM"]
 type: "post"
 truncated: true
 summary: Meet Converso, a LangChain extension that improves LLMs performance on the usage of complex tools
-heroImage: /images/posts/Data_acquisition_chatbot_with_Converso/hero.jpg
+heroImage: /images/posts/Enhancing_LLM_Tool_Usage_with_Converso/hero.jpg
 showTableOfContents: true
 
 ---
@@ -15,16 +15,16 @@ showTableOfContents: true
 Since their introduction, [tools](https://python.langchain.com/v0.1/docs/modules/tools/) have significantly expanded the capabilities of LLMs. 
 The ability to execute arbitrary code, placing the burden on the LLM to determine when to call a tool and the parameters to use, enabled many real-life applications.
 
-However, stateless conversations coerce LLMs to only rely on conversation history to manage tool calls.
+However, stateless conversations coerce LLMs to rely only on conversation history to manage tool calls.
 This makes it difficult to implement complex tools, with more than a couple of parameters and some decisional logic.
-Moverover, the little control over the LLM's actions is a bit scary when implementing tools with real-world side-effect, such as sending an e-mail or placing an order.
+Moreover, the little control over the LLM's actions is a bit scary when implementing tools with real-world side-effects, such as sending an e-mail or placing an order.
 
 **Converso** is a Langchain extension that tries to overcome this limitation by making the conversation *stateful* and guiding the LLM.
 
 # A running example
 
-Let's say that we want to implement a simple tool to allow users to send emails through the LLM.  
-The tool input is described by this Pydantic model:
+Let's say we want to implement a simple tool for users to send emails through the LLM.  
+This Pydantic model describes the tool input:
 
 ```python
 from pydantic import BaseModel, Field, field_validator
@@ -161,11 +161,11 @@ Not only it didn't ask for the body of the email or the subject, but he sent the
 
 ## Considerations
 
-The problem shown above is enough to limit any implementation of tools in real life products. The lack of control over LLM actions poses a significant risk.
+The problem shown above is enough to limit any implementation of tools in real-life products. The lack of control over LLM actions poses a significant risk.
 
 One might argue that a smarter prompt or a more advanced model could mitigate this issue, and they would likely be correct.
-However this approach is more costly (better models cost more) and still solely relies onto the LLM to understand what to do with little guidance.  
-Also, relying on the conversation history still poses a big limit. Most applications limit the length of the history that is carried during the conversation to reduce costs and avoid to exceed the model's context window. And what if the tool requires a lot of data and some of it falls out of the history? Besides, asking the model to extract all of the input data from the entire textual history is just pushing the limit.
+However, this approach is more costly (better models cost more) and still solely relies upon the LLM to understand what to do with little guidance.  
+Also, relying on the conversation history still poses a big limit. Most applications limit the length of the history that is carried during the conversation to reduce costs and avoid exceeding the model's context window. And what if the tool requires a lot of data and some of it falls out of history? Besides, asking the model to extract all of the input data from the entire textual history is just pushing the limit.
 
 There must be a better way.
 
@@ -216,7 +216,7 @@ However standard tools can be used even when a FormTool is active; for example, 
 
 ## Let’s test it
 
-The agent is the same defined before.
+The agent is the same as defined before.
 
 ```
 Human: send an email to john to announce that i finished my website
@@ -267,13 +267,13 @@ This time, the conversation is indeed a lot longer (and costly) - but a lot more
 
 The LLM not only does not hallucinate parameters, but it guides the user through the acquisition of all of the needed data.
 
-Data is stored into an object and doesn't have to be extracted from the conversation history each time. In fact, the history can be a lot shorter and the data won't be forgetten.
+Data is stored in an object and doesn't have to be extracted from the conversation history each time. In fact, the history can be a lot shorter and the data won't be forgotten.
 
-Moreover, before executing any action, a confirmation is asked to the user, presenting all of the corrected data. If the LLM (or the user) made a mistake or a wrong assumption, there is room for correction.
+Moreover, before executing any action, a confirmation is asked of the user, presenting all of the corrected data. If the LLM (or the user) made a mistake or a wrong assumption, there is room for correction.
 
 # Conclusions
 
-Tools are a great addition to LLMs, since they can be used to perform actions in the real world and break the limits of a text-only conversation.  
+Tools are a great addition to LLMs since they can be used to perform actions in the real world and break the limits of a text-only conversation.  
 However, allowing LLMs to access potentially harmful tools without guidance can be both dangerous and counterproductive.
-Converso is a LangChain-based library that allows to define tools and agents that guide the user toward data acquisition, and ask for confirmation before executing any action.
+Converso is a LangChain-based library that allows to define tools and agents that guide the user toward data acquisition and ask for confirmation before executing any action.
 This allows developers to build complex tools while maintaining control over the unpredictability of LLMs.
