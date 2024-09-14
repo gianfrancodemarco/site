@@ -86,3 +86,7 @@ enableRobotsTXT = true
     startLevel = 1
     endLevel = 2
     ordered = false
+
+[services]
+  [services.disqus]
+    shortname = 'gianfrancodemarco-dev'
