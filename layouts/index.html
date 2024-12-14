@@ -1,14 +1,15 @@
 {{ define "main" }}
 <section class="home-about">
-	<div class="avatar">
+    <div class="avatar">
         {{ if isset .Site.Params "avatarurl" }}
-        <img class={{ .Site.Params.AvatarSize | default "size-m" }} src='{{ .Scratch.Get "avatarImgSrc" }}' alt="{{ .Site.Params.AvatarAltText|default "avatar" }}" />
+        <img class={{ .Site.Params.AvatarSize | default "size-m" }} src='{{ .Scratch.Get "avatarImgSrc" }}'
+            alt="{{ .Site.Params.AvatarAltText|default " avatar" }}" />
         {{ end }}
-	</div>
+    </div>
 
     <h1>{{ .Site.Title }}</h1>
     {{ if isset .Site.Params "description" }}
-        <h3>{{ .Site.Params.Description }}</h3>
+    <h3>{{ .Site.Params.Description }}</h3>
     {{ end }}
 
 </section>
@@ -20,7 +21,7 @@
     <ul class="social-icons-list">
         {{ range .Site.Params.SocialIcons }}
         <li class="social-icon">
-            <a href="{{ .url }}" {{ if .rel }}rel="{{ .rel }}"{{ end }} aria-label="Learn more on {{ .name }}">
+            <a href="{{ .url }}" {{ if .rel }}rel="{{ .rel }}" {{ end }} aria-label="Learn more on {{ .name }}">
                 <img class="svg-inject" src="/svg/icons/{{ .name }}.svg" />
             </a>
         </li>
@@ -36,40 +37,39 @@
 {{ end }}
 
 {{ if isset .Site.Params "projects"}}
-    <h2 class="text-center">{{ i18n (.Site.Params.ShowPostsOnHomePage | humanize) }} Projects </h2>
+<h2 class="text-center">{{ i18n (.Site.Params.ShowPostsOnHomePage | humanize) }} Projects </h2>
 
-    <div class="card-container my-2">
-        {{ $projects := where .Site.Pages "Params.type" "project" }}
-        {{ $projectCount := len $projects }}
-        {{ range $index, $project := $projects }}
-            {{- partial "list-projects.html" $project -}}
-            {{ if mod (add $index 1) 3 | eq 0 }}
-                </div>
-                <div class="card-container my-2">
-            {{ end }}
-        {{ end }}
-    </div>
-
+<div class="card-container my-2">
+    {{ $projects := where .Site.Pages "Params.type" "project" }}
+    {{ $projectCount := len $projects }}
+    {{ range $index, $project := $projects }}
+    {{- partial "list-projects.html" $project -}}
+    {{ if mod (add $index 1) 3 | eq 0 }}
+</div>
+<div class="card-container my-2">
+    {{ end }}
+    {{ end }}
+</div>
 
 {{ end }}
 
 {{ if isset .Site.Params "showpostsonhomepage" }}
 
-    <div class="home-posts list-posts">
-        <h2 class="text-center">{{ i18n (.Site.Params.ShowPostsOnHomePage | humanize) }} Posts</h2>
+<div class="home-posts list-posts">
+    <h2 class="text-center">{{ i18n (.Site.Params.ShowPostsOnHomePage | humanize) }} Posts</h2>
 
-        {{ $posts := where .Site.Pages "Params.type" "post" }}
+    {{ $posts := union (where .Site.Pages "Params.type" "post") (where .Site.Pages "Params.type" "external-post") }}
 
-        {{ if eq .Site.Params.ShowPostsOnHomePage "popular" }}
-            {{ range $posts.ByWeight | first 4 }}
-                {{- partial "list-posts.html" . -}}
-            {{ end }}
-        {{ else if eq .Site.Params.ShowPostsOnHomePage "recent" }}
-            {{ range $posts.ByDate.Reverse | first 4 }}
-                {{- partial "list-posts.html" . -}}
-            {{ end }}
-        {{ end }}
-    </div>
+    {{ if eq .Site.Params.ShowPostsOnHomePage "popular" }}
+    {{ range $posts.ByWeight | first 4 }}
+    {{- partial "list-posts.html" . -}}
+    {{ end }}
+    {{ else if eq .Site.Params.ShowPostsOnHomePage "recent" }}
+    {{ range $posts.ByDate.Reverse | first 4 }}
+    {{- partial "list-posts.html" . -}}
+    {{ end }}
+    {{ end }}
+</div>
 
 {{ end }}
 

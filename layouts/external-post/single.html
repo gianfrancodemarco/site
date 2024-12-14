@@ -1,0 +1,15 @@
+{{ define "main" }}
+<script>
+    window.open('{{ .Params.externalUrl }}', '_blank');
+    window.location.href = '/';  // Redirect back to homepage
+</script>
+<noscript>
+    <meta http-equiv="refresh" content="0; url={{ .Params.externalUrl }}">
+</noscript>
+<div class="container">
+    <p>Opening <a href="{{ .Params.externalUrl }}" target="_blank" rel="noopener noreferrer">{{ .Params.externalUrl
+            }}</a> in a new tab...</p>
+    <p>If it doesn't open automatically, please click the link above.</p>
+    <p><a href="/">Return to homepage</a></p>
+</div>
+{{ end }}
