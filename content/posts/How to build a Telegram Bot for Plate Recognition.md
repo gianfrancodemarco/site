@@ -6,7 +6,7 @@ tags: ["AI", "Computer Vision", "Python", "Grafana", "MLflow", "Telegram"]
 type: "post"
 truncated: true
 summary: Explore how to build a Telegram Bot for Plate Recognition, with a complete CI/CD pipeline and monitoring dashboards. 
-heroImage: /images/posts/How_to_build_a_Telegram_Bot_for_Plate_Recognition/hero.jpg
+image: /images/posts/How_to_build_a_Telegram_Bot_for_Plate_Recognition/hero.jpg
 showTableOfContents: true
 
 ---

@@ -6,7 +6,7 @@ type: "post"
 tags: ["Python", "Databases", "Data Engineering"]
 weight: 1
 summary: "Developing a dumb database from scratch using Python - implement the most common operations on with an Append Only Database"
-heroImage: /images/posts/dumb-db-1/hero.jpg
+image: /images/posts/dumb-db-1/hero.jpg
 showTableOfContents: true
 ---
 

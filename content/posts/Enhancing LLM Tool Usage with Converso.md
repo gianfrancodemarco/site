@@ -6,7 +6,7 @@ tags: ["AI", "Python", "LangChain", "LLM"]
 type: "post"
 truncated: true
 summary: Meet Converso, a LangChain extension that improves LLMs performance on the usage of complex tools
-heroImage: /images/posts/Enhancing_LLM_Tool_Usage_with_Converso/hero.jpg
+image: /images/posts/Enhancing_LLM_Tool_Usage_with_Converso/hero.jpg
 showTableOfContents: true
 
 ---

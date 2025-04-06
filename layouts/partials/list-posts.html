@@ -4,8 +4,8 @@
         {{ else }}
         <a href="{{ .Permalink }}" class="post-link no-a-style">
             {{ end }}
-            {{ if isset .Params "heroimage" }}
-            <div class="post-image" style="background-image: url('{{ .Params.heroImage }}');"></div>
+            {{ if isset .Params "image" }}
+            <div class="post-image" style="background-image: url('{{ .Params.image }}');"></div>
             {{ end }}
             <div class="p-4">
                 <h2 class="post-title m-0">{{ .Title }}</h2>

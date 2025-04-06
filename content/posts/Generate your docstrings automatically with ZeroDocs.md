@@ -6,7 +6,7 @@ tags: ["AI", "Python", "CI/CD", "LLM"]
 type: "post"
 truncated: true
 summary: ZeroDocs is a tool that uses OpenAI's APIs to automatically generate docstrings for Python projects and create pull requests with the changes, integrating easily with GitHub Actions.
-heroImage: /images/posts/Generate_your_docstrings_automatically_with_ZeroDocs/hero.jpg
+image: /images/posts/Generate_your_docstrings_automatically_with_ZeroDocs/hero.jpg
 showTableOfContents: true
 ---
 
