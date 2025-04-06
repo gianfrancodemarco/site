@@ -121,6 +121,8 @@ One of the simplest way to store data is to use a CSV file.
 At this point, we only need to store the header of the CSV - which is the column names for the table.
 We enforce that each table has a primary key column named `id` (the reason will be clear later).
 
+> **Note:** We also append a column named `__deleted__` to the table, which is used to implement the delete operation.
+
 ```python
     def get_table_file_path(self, table_name: str) -> Path:
         return self.tables_dir / f"{table_name}.csv"
@@ -179,7 +181,7 @@ Being a table just a file on disk, the drop operation is straightforward: we jus
  
 Right now, our database is pretty much useless.
 To make anything useful, we need at least to be able to store data.
-Being the file an append only CSV, inserting a row means just opening the file in `append` mode and writing the row to the end of the file. 
+Since the file is an append-only CSV, inserting a row simply means opening the file in `append mode` and writing the row at the end.
 
 *We must be careful to set the `__deleted__` column to `False` for all of the rows.*
 
@@ -196,17 +198,15 @@ Being the file an append only CSV, inserting a row means just opening the file i
 
 > **Note:** At this point, we are not checking that the inserted data respects the table schema, so we just trust the user.
 
-Also, being the file append only, we cannot update or delete data directly, so we need another strategy to implement updates and deletes.
-
 ## Update Data
 
 Any respectable database (even if DumbDB is not one of them!) should be able to update data.
-The constraint of having an append only file means that we cannot directly update a previously inserted row, but we have to think of another strategy.
+The constraint of having an append only file means that we cannot directly update a previously inserted row directly on the CSV file, but we have to think of another strategy.
 
 In reality, the strategy is pretty simple: we just insert a new row with the updated data, and when we query we only consider the most recent data.
 So, updating data is just a wrapper around the insert operation.
 
-However, for this to work, we need to be able to understand when two CSV rows are referring to the same row.
+However, for this to work, we need to be able to understand when two CSV rows are referring to the same logical row.
 To do this, we'll use the primary key column that we enforced to be present in each table.
 
 > **Note:** Before inserting, we add a check to make sure that the row that we want to update exists.
@@ -253,8 +253,8 @@ The query operation is probably the most complex one, since it needs to be able 
 Basically, our **simplified query operation** will take a dict of column names and values, and will return a list of rows that match the query. Only the equality operator is supported at this point.
 
 The query operation will need to:
-- find all of the rows that match the query
-- for each row, keep only the latest row
+- find all of the rows in the CSV file that match the query
+- for each logical row, keep only the latest row
 - if a row is marked as deleted, ignore all previous rows with the same id
 
 The strategy implemented is pretty simple: we create a dictionary of the rows that we have found, using the `id` as the key.
@@ -486,4 +486,4 @@ Fortunately, for our DumbDB we can just ignore this and run the compaction opera
 # References
 
 - [Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems 1st Edition](https://www.oreilly.com/library/view/designing-data-intensive-applications/9781491903063/) by Martin Kleppmann
-- [DumbDB source code](https://github.com/gianfrancodemarco/dumbdb)
+- [DumbDB source code](https://github.com/gianfrancodemarco/dumbdb/tree/1.0.0-append-only-database)
