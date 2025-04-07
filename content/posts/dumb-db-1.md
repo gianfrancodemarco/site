@@ -1,11 +1,11 @@
 ---
-title: "DumbDB: Implementing a dumb DBMS from scratch - Part I: an Append Only Database"
+title: "DumbDB: Implementing a dumb DBMS from scratch - Part I: an Append-Only Database"
 date: 2025-04-06
 description: ""
 type: "post"
 tags: ["Python", "Databases", "Data Engineering"]
 weight: 1
-summary: "Developing a dumb DBMS from scratch using Python - implement the most common operations on with an Append Only Database"
+summary: "Developing a dumb DBMS from scratch using Python - implement the most common operations on with an Append-Only Database"
 image: /images/posts/dumb-db-1/hero.jpg
 showTableOfContents: true
 ---
@@ -32,13 +32,27 @@ We well define a basic interface for our DBMS - the minimal set of operations th
 We do this using an abstract class:
 
 ```python
+def require_isset_database(func):
+    @wraps(func)
+    def wrapper(self, *args, **kwargs):
+        if self.current_database is None:
+            raise ValueError(
+                "No database selected. Use 'use_database' to select a database first.")
+        return func(self, *args, **kwargs)
+    return wrapper
+
+
 @dataclass
-class Database(ABC):
-    name: str
+class DBMS(ABC):
     root_dir: Path = Path("./data")
+    current_database: str | None = None
 
     @abstractmethod
     def create_database(name: str) -> None:
+        raise NotImplementedError()
+
+    @abstractmethod
+    def use_database(name: str) -> None:
         raise NotImplementedError()
 
     @abstractmethod
@@ -68,11 +82,15 @@ class Database(ABC):
 
 Basically, we want to be able to:
 - create a database
+- use a database
 - create tables into the database
+- drop tables from the database
 - insert data (rows) into a table
 - update data
 - delete data
 - query data from a table, based on some criteria
+
+Most of the operations need a specific database to be selected, so we'll add a decorator to check this and throw an error if no database is selected.
 
 As previously said, a DBMS is basically an abstraction of a file system, so we'll need to define the structure of the databases files.
 For this project, the approach will be to have:
@@ -80,11 +98,11 @@ For this project, the approach will be to have:
 - inside the database, a folder for tables (in the future, we could have a folder for indexes and other things as well)
 - inside the tables folder, a file for the table data
 
-The choice of how to structure the data for the table is a fundamental one, and it will have a big impact on the performance of the database. Our first implementation will be an **append only database**.
+The choice of how to structure the data for the table is a fundamental one, and it will have a big impact on the performance of the database. Our first implementation will be an **append-only database**.
 
-# An Append Only Database
+# An Append-Only Database
 
-An **append only database** is a database that only allows to append data to the end of the file. This makes the database much simpler to implement, and makes inserts extremely fast.
+An **append-only database** is a database that only allows to append data to the end of the file. This makes the database much simpler to implement, and makes inserts extremely fast.
 
 On the other hand, to find a specific row, we need to read the entire file, which makes the queries much slower.
 
@@ -96,25 +114,49 @@ Creating a database is straightforward: we just need to create a folder for the 
 
 ```python
 @dataclass
-class AppendOnlyDatabase(Database):
+class AppendOnlyDBMS(Database):
     """
-    A class representing an append-only database.
-    This database does not store data in memory, but rather on disk.
+    A class representing an append-only DBMS.
+    This DBMS does not store data in memory, but rather on disk.
     It only appends data to the end of the file. For each primary key, the last record is the valid one.
     """
 
+    def get_database_dir(self, db_name: str) -> Path:
+        return self.root_dir / db_name
+
+    def get_tables_dir(self, db_name: str) -> Path:
+        return self.get_database_dir(db_name) / "tables"
+
+    @property
+    def current_database_dir(self) -> Path:
+        return self.get_database_dir(self.current_database)
+
     @property
     def tables_dir(self) -> Path:
-        return self.root_dir / f"{self.name}/tables"
+        return self.get_tables_dir(self.current_database)
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.create_database()
+    def create_database(self, db_name: str) -> None:
+        db_dir = self.get_database_dir(db_name)
+        if db_dir.exists():
+            raise ValueError(f"Database '{db_name}' already exists")
 
-    def create_database(self) -> None:
-        if not self.tables_dir.exists():
-            self.tables_dir.mkdir(parents=True)
+        tables_dir = self.get_tables_dir(db_name)
+        tables_dir.mkdir(parents=True)
+```
 
+## Use Database
+
+Using a database simply means setting the current database to the one we want to use - this allows us to use the decorators we defined earlier to check that the database is selected.
+
+> **Note:** From now on, all the operations will have the `require_isset_database` decorator.
+
+```python
+    def use_database(self, name: str) -> None:
+        db_dir = Path(self.root_dir / name)
+        if not db_dir.exists():
+            raise ValueError(
+                f"Database '{name}' does not exist. You must create it before using it.")
+        self.current_database = name
 ```
 
 ## Create Table
@@ -130,6 +172,7 @@ We enforce that each table has a primary key column named `id` (the reason will 
     def get_table_file_path(self, table_name: str) -> Path:
         return self.tables_dir / f"{table_name}.csv"
 
+    @require_isset_database
     def create_table(self, table_name: str, headers: list[str] = None) -> None:
         """Create a new table in the database - which is just a new csv file."""
         table_file = self.get_table_file_path(table_name)
@@ -148,8 +191,10 @@ At this point, we are able to run the following code:
 ```python
 import dumbdb
 
-db = dumbdb.AppendOnlyDatabase("my_first_db")
-db.create_table("my_first_table", ["id", "name", "age"])
+dbms = dumbdb.AppendOnlyDBMS()
+dbms.create_database("my_first_db")
+dbms.use_database("my_first_db")
+dbms.create_table("my_first_table", ["id", "name", "age"])
 ```
 
 And the situation on disk should be:
@@ -172,6 +217,7 @@ Hurray! We have successfully initialized a database and a table!
 Being a table just a file on disk, the drop operation is straightforward: we just need to delete the file.
 
 ```python
+    @require_isset_database
     def drop_table(self, table_name: str) -> None:
         table_file = self.get_table_file_path(table_name)
         if not table_file.exists():
@@ -189,6 +235,7 @@ Since the file is an append-only CSV, inserting a row simply means opening the f
 *We must be careful to set the `__deleted__` column to `False` for all of the rows.*
 
 ```python
+    @require_isset_database
     def insert(self, table_name: str, value: dict):
         table_file = self.get_table_file_path(table_name)
         if not table_file.exists():
@@ -203,8 +250,8 @@ Since the file is an append-only CSV, inserting a row simply means opening the f
 
 ## Update Data
 
-Any respectable database (even if DumbDB is not one of them!) should be able to update data.
-The constraint of having an append only file means that we cannot directly update a previously inserted row directly on the CSV file, but we have to think of another strategy.
+Any respectable DBMS (even if DumbDB is not one of them!) should be able to update data.
+The constraint of having an append-only file means that we cannot directly update a previously inserted row directly on the CSV file, but we have to think of another strategy.
 
 In reality, the strategy is pretty simple: we just insert a new row with the updated data, and when we query we only consider the most recent data.
 So, updating data is just a wrapper around the insert operation.
@@ -215,6 +262,7 @@ To do this, we'll use the primary key column that we enforced to be present in e
 > **Note:** Before inserting, we add a check to make sure that the row that we want to update exists.
 
 ```python
+    @require_isset_database
     def update(self, table_name: str, value: dict) -> None:
         table_file = self.get_table_file_path(table_name)
         if not table_file.exists():
@@ -229,7 +277,7 @@ To do this, we'll use the primary key column that we enforced to be present in e
 
 ## Delete Data
 
-As for the update operation, being the file append only, we cannot directly delete a row.
+As for the update operation, being the file append-only, we cannot directly delete a row.
 That's why we have been preparing the way for this operation by adding the `__deleted__` column.
 
 When we want to delete a row, we can just insert a new row with the same id, but with the `__deleted__` column set to `True`.  
@@ -238,6 +286,7 @@ When we query the data, if we found a row with the `__deleted__` column set to `
 >*Note:* The *delete* operation is identical to the *insert* operation, except for the `__deleted__` column value - so it could be better engineered.
 
 ```python
+    @require_isset_database
     def delete(self, table_name: str, value: dict) -> None:
         table_file = self.get_table_file_path(table_name)
         if not table_file.exists():
@@ -266,18 +315,19 @@ We do the same for the deleted rows.
 After that, we exclude from the result all of the rows that are marked as deleted.
 
 ```python
-def query(self, table_name: str, query: dict) -> QueryResult:
-    start_time = time.time()
-    table_file = self.get_table_file_path(table_name)
-    if not table_file.exists():
+    @require_isset_database
+    def query(self, table_name: str, query: dict) -> QueryResult:
+        start_time = time.time()
+        table_file = self.get_table_file_path(table_name)
+        if not table_file.exists():
         raise ValueError(f"Table '{table_name}' does not exist")
 
-    matching_rows = {}
-    with open(table_file, 'r', newline='') as f:
-        csv_reader = csv.DictReader(f)
-        for row in csv_reader:
-            if all(row[key] == query[key] for key in query):
-                matching_rows[row['id']] = row
+        matching_rows = {}
+        with open(table_file, 'r', newline='') as f:
+            csv_reader = csv.DictReader(f)
+            for row in csv_reader:
+                if all(row[key] == query[key] for key in query):
+                    matching_rows[row['id']] = row
 
     # Remove all rows for which the last line is a delete
     matching_rows = {k: v for k,
@@ -296,22 +346,24 @@ Let's add some data:
 ```python
 import dumbdb
 
-db = dumbdb.AppendOnlyDatabase("my_first_db")
-db.create_table("users", ["id", "name", "age"])
+dbms = dumbdb.AppendOnlyDBMS()
+dbms.create_database("my_first_db")
+dbms.use_database("my_first_db")
+dbms.create_table("users", ["id", "name", "age"])
 
-db.insert("users", {"id": "1", "name": "John", "age": "30"})
-db.insert("users", {"id": "2", "name": "Jane", "age": "25"})
-db.insert("users", {"id": "3", "name": "Luke", "age": "25"})
+dbms.insert("users", {"id": "1", "name": "John", "age": "30"})
+dbms.insert("users", {"id": "2", "name": "Jane", "age": "25"})
+dbms.insert("users", {"id": "3", "name": "Luke", "age": "25"})
 ```
 
 Now, let's query the data:
 
 ```python
-print(db.query("users", {"id": "2"}))
+print(dbms.query("users", {"id": "2"}))
 
 >>> QueryResult(time=0.0006139278411865234, rows=[{'id': '2', 'name': 'Jane', 'age': '25', '__deleted__': 'False'}])
 
-print(db.query("users", {"age": "25"}))
+print(dbms.query("users", {"age": "25"}))
 
 >>> QueryResult(
     time=0.0006849765777587891, 
@@ -325,8 +377,8 @@ print(db.query("users", {"age": "25"}))
 Oh, we forgot that today is Jane's birthday! Let's update her age:
 
 ```python
-db.update("users", {"id": "2", "name": "Jane", "age": "26"})
-print(db.query("users", {"id": "2",}))
+dbms.update("users", {"id": "2", "name": "Jane", "age": "26"})
+print(dbms.query("users", {"id": "2",}))
 
 >>> QueryResult(time=0.0006139278411865234, rows=[{'id': '2', 'name': 'Jane', 'age': '26', '__deleted__': 'False'}])
 ```
@@ -334,8 +386,8 @@ print(db.query("users", {"id": "2",}))
 Now that we are done with it, let's drop our table and call it a day!
 
 ```python
-db.drop_table("users")
-print(db.query("users", {"id": "2"}))
+dbms.drop_table("users")
+print(dbms.query("users", {"id": "2"}))
 
 >>> ValueError: Table 'users' does not exist
 ```
@@ -411,6 +463,7 @@ It will also remove all of the rows that are marked as deleted.
 The compacted file will contain only the current state of the table.
 
 ```python
+    @require_isset_database
     def compact_table(self, table_name: str):
         """Compact a table."""
         table_file = self.get_table_file_path(table_name)
@@ -440,15 +493,17 @@ Let's check if it works:
 ```python
 import dumbdb
 
-db = dumbdb.AppendOnlyDatabase(name="compact_test")
-db.create_table("users", ["id", "name", "age"])
+dbms = dumbdb.AppendOnlyDBMS()
+dbms.create_database("compact_test")
+dbms.use_database("compact_test")
+dbms.create_table("users", ["id", "name", "age"])
 
-db.insert("users", {"id": "1", "name": "John Smith", "age": "20"})
-db.insert("users", {"id": "2", "name": "Mike Smith", "age": "21"})
-db.insert("users", {"id": "3", "name": "Luke Skywalker", "age": "26"})
+dbms.insert("users", {"id": "1", "name": "John Smith", "age": "20"})
+dbms.insert("users", {"id": "2", "name": "Mike Smith", "age": "21"})
+dbms.insert("users", {"id": "3", "name": "Luke Skywalker", "age": "26"})
 
-db.update("users", {"id": "1", "name": "John Smith", "age": "21"})
-db.delete("users", {"id": "2", "name": "Mike Smith", "age": "21"})
+dbms.update("users", {"id": "1", "name": "John Smith", "age": "21"})
+dbms.delete("users", {"id": "2", "name": "Mike Smith", "age": "21"})
 ```
 
 File content:
@@ -466,7 +521,7 @@ id,name,age,__deleted__
 Let's compact the table:
 
 ```python
-db.compact_table("users")
+dbms.compact_table("users")
 ```
 
 File content after compaction:
