@@ -1,20 +1,22 @@
 ---
-title: "DumbDB: Implementing a dumb database from scratch - Part I: an Append Only Database"
+title: "DumbDB: Implementing a dumb DBMS from scratch - Part I: an Append Only Database"
 date: 2025-04-06
 description: ""
 type: "post"
 tags: ["Python", "Databases", "Data Engineering"]
 weight: 1
-summary: "Developing a dumb database from scratch using Python - implement the most common operations on with an Append Only Database"
+summary: "Developing a dumb DBMS from scratch using Python - implement the most common operations on with an Append Only Database"
 image: /images/posts/dumb-db-1/hero.jpg
 showTableOfContents: true
 ---
 
 Having a fundamental understanding of how databases work is crucial for developers - that's true even if you work as a frontend developer and you won't ever touch a database directly.
 
-Databases are fundamentally an **abstraction of a file system**, that hides from the developer the complexity of the underlying storage, and takes care of a huge amount of details - concurrency, data integrity, availability, optimization, etc., which we usually take for granted.
+Databases are fundamentally a **systematic collection of data**, and are managed by software called **DBMS** (Database Management Systems).
 
-As I periodically find myself refreshing my knowledge on the subject, and I'm a huge fan of learning by doing, I had the idea of trying to implement a simple database from scratch.
+A DBMS is an **abstraction of a file system**, that hides from the developer the complexity of the underlying storage, and takes care of a huge amount of details - concurrency, data integrity, availability, optimization, etc., which we usually take for granted.
+
+As I periodically find myself refreshing my knowledge on the subject, and I'm a huge fan of learning by doing, I had the idea of trying to implement a simple DBMS from scratch.
 As per the title of the project (DumbDB), the aim is not to create a database useful for anything, but rather explore at a deeper level some concepts such as:
 - **basic database strategies**
 - **basic database APIs**
@@ -24,9 +26,9 @@ As per the title of the project (DumbDB), the aim is not to create a database us
 
 The implementation will be done in Python and the source code will be available on [GitHub](https://github.com/gianfrancodemarco/dumbdb).
 
-# A Database interface
+# A Database Management System interface
 
-We well define a basic interface for our database - the minimal set of operations that we expect it to support.
+We well define a basic interface for our DBMS - the minimal set of operations that we expect it to support.
 We do this using an abstract class:
 
 ```python
@@ -72,7 +74,7 @@ Basically, we want to be able to:
 - delete data
 - query data from a table, based on some criteria
 
-As previously said, a database is basically an abstraction of a file system, so we'll need to define the structure of the database files.
+As previously said, a DBMS is basically an abstraction of a file system, so we'll need to define the structure of the databases files.
 For this project, the approach will be to have:
 - a folder for each database
 - inside the database, a folder for tables (in the future, we could have a folder for indexes and other things as well)
@@ -487,4 +489,5 @@ Fortunately, for our DumbDB we can just ignore this and run the compaction opera
 # References
 
 - [Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems 1st Edition](https://www.oreilly.com/library/view/designing-data-intensive-applications/9781491903063/) by Martin Kleppmann
+- [What is a database?](https://aws.amazon.com/what-is/database)
 - [DumbDB source code](https://github.com/gianfrancodemarco/dumbdb/tree/1.0.0-append-only-database)
