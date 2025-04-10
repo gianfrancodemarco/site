@@ -1,6 +1,6 @@
 ---
 title: "DumbDB: Implementing a dumb DBMS from scratch - Part II: introducing the Hash Index"
-date: 2025-04-10
+date: 2025-04-12
 description: ""
 type: "post"
 tags: ["Python", "Databases", "Data Engineering"]
@@ -13,20 +13,20 @@ showTableOfContents: true
 # Introduction
 
 In the [previous post](https://gianfrancodemarco.dev/posts/dumb-db-1), we implemented an Append-Only Database using CSV files to store the data.  
-We have seen how insert, updates and deletes perform really well, being implemented as a single append operation on the table file.  
-However, queries are not so efficient, since we need to scan the entire table file to retrieve the data, and this scales poorly with the size of the table.  
+We have seen how inserts, updates and deletes perform really well, being implemented as a single append operation on the table file.  
+However, queries are not very efficient since scanning the entire table file to retrieve data scales poorly with table size.
 
 In this post, we will see how we can use **Hash Indexes** to boost the performance of the query operations.
 
 # Hash Index
 
-An **index** is an *additional data structure that allows improve the performance of query operations*.  
+An **index** is an *additional data structure that allows to improve the performance of query operations*.  
 Generally, the idea of indexes is to keep some **metadata** about the data, so that we can quickly find it at a later time.  
 Each index **worsens** write operations, since it implies additional operations to keep it up to date.  
 However, most workloads have a **read-heavy** nature, so the performance benefits usually **outweigh** the additional write operations.  
 
 There are many types of indexes, with different implementations, trade-offs and supported operations.  
-One of the most common type of indexes is the **Hash Index** - an hash table used to speed up the lookup of a specific value.  
+One of the most common type of indexes is the **Hash Index** - a hash table used to speed up the lookup of a specific value.  
 
 For the Append-Only Database, we will use a **Hash Index** on the **primary key** column.  
 The key of the hash table will be the value of the primary key, and the value will be a tuple containing the **start byte** and the **end byte** of the row in the table file.  
@@ -52,8 +52,8 @@ The hash table will contain:
 
 When querying for a specific *id*, instead of scanning the entire table file, we can use the hash table to quickly find the position of the row in the file and only read the corresponding bytes.
 
-> *Note*: A proper DBMS would have a **query planner** to *analyze* the query, check the indexes and choose the best strategy to execute the query.  
-> DumbDB is okay with just assuming the index exists on primary key and use it for all queries that use the primary key.
+> *Note*: A proper DBMS would have a **query planner** to *analyze* the query, check the indexes, and choose the best strategy to execute the query.  
+> DumbDB is okay with just assuming the index exists on the primary key and use it for all queries that use the primary key.
 
 ## Implementation
 
@@ -160,7 +160,7 @@ Inevitably, this will be an expensive operation since it needs to read and proce
                 self.get_table_file_path(table), "id")
 ```
 
-Also, we'll create an empty index when a table is created, and delete the existing index when a table is deleted.
+Additionally, we create an empty index when a table is created and delete the index when a table is dropped.
 
 ```python
     @require_isset_database
@@ -176,12 +176,12 @@ Also, we'll create an empty index when a table is created, and delete the existi
         del self.hash_indexes[table_name]
 ```
 
-> *Note*: Optimizations are possible - e.g. building the index in background and only start using it after it's ready.
+> *Note*: Optimizations are possible - e.g. building the index in the background and only using it once it's ready.
 
 ## Update the index
 
 A drawback of indexing is the need to keep the index up to date when data changes.  
-In our case, we need to update the index when a row is inserted, updated or deleted.
+In our case, we need to update the index when a row is inserted, updated, or deleted.
 We can leverage most of the logic already implemented in the `AppendOnlyDBMS`, and only need to implement the logic to update the index.
 
 ```python
@@ -231,7 +231,7 @@ Also, indexes could be created also for non-primary key columns, multiple column
 
 In our implementation, we always create an index on the primary key column for each table.  
 For this reason, the query operation will always assume the index exists and use it to execute the query, if the `id` column is used in the query.  
-If the `id` column is not used in the query, the query operation will fallback to the default implementation.
+If the `id` column is not used in the query, the query operation will fall back to the default implementation.
 
 ```python
 
@@ -267,7 +267,7 @@ If the `id` column is not used in the query, the query operation will fallback t
  
 # Benchmarks
 
-Now let's evaluate if all how this work was worth it.  
+Now let’s evaluate whether all this work was worth it.  
 We'll run a few benchmarks, both on the classical Append-Only Database and the one with the Hash Index.
 The benchmarks will check how the performance of each operation varies, depending on the size of the table.
 
@@ -289,7 +289,7 @@ However, the time needed to perform a query grows linearly with the table size, 
 
 ![Regular DBMS Query](/images/posts/dumb-db-2/Regular_DBMS_Query_Time.png)
 
-We can also simulate a workload, composed of 70% queries and 20% inserts and 10% updates, to see how the performance of the database evolves.
+We can also simulate a workload composed of 70% queries, 20% inserts, and 10% updates to see how the database performance evolves.  
 We see that the query time dominates the total time, so the whole workload time scales linearly with the table size.
 
 ![Regular DBMS Workload](/images/posts/dumb-db-2/Regular_DBMS_Mixed_Workload_Time.png)
@@ -307,8 +307,7 @@ Even if inserts require to update the index, we can see that the performance is 
 
 ![Hash Index Insert](/images/posts/dumb-db-2/DBMS_WITH_hash_indexes_insert_time.png)
 
-However, we can see the benefits of having the index on query operations (with the primary key as the search key): queries are now extremely fast (same order of magnitude as the inserts),
-Moreover, the required time doesn't grow with the table size anymore, and a query on a table with 2000 rows takes the same time as a query on a table with 100k rows.
+However, we can observe the benefits of using an index for query operations when the primary key is the search key. Queries are now extremely fast—comparable to the performance of inserts. Moreover, the query time no longer increases with table size; a query on a table with 2,000 rows takes the same time as one on a table with 100,000 rows.
 
 ![Hash Index Query](/images/posts/dumb-db-2/DBMS_WITH_hash_indexes_query_time.png)
 
@@ -331,10 +330,10 @@ However, this is more convenient than keeping the whole table in memory, since t
 
 The most affected operation is booting the database, since the indexes need to be built from scratch.
 This can be a problem, especially if many tables are present in the database.
-However there are many to mitigate this issue:
+However there are many strategies to mitigate this issue:
 - Use more efficient formats for the data instead of CSV files 
-- Build the index in background while the database is being used, and take advantage of parallel processing
-- Store the index on disk, so that it can be loaded in memory when the database is started (this introduces additional complexity and increased I/O)
+- Build the index in background while the database is in use, taking advantage of parallel processing
+- Store the index on disk so that it can be loaded into memory when the database starts (this introduces additional complexity and increased I/O)
 
 ## Queries limitations
 
