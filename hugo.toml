@@ -10,8 +10,9 @@ enableRobotsTXT = true
 
 [params]
   avatarURL = "/images/avatar.jpg"
-  description = "Data & AI Software Engineer | M.Sc. in Artificial Intelligence"
+  description = "Data & AI Engineer | M.Sc. in Artificial Intelligence"
   showPostsOnHomePage = "popular"
+  displayReadingTime = true
   footer = "Gianfranco Demarco"
 
   socialIcons = [
@@ -51,49 +52,51 @@ enableRobotsTXT = true
   [[menu.main]]
     # Unique identifier for a menu item
     identifier = "posts"
-
     url = "/posts/"
-    
     # You can add extra information before the name (HTML format is supported), such as icons
     pre = ""
-
     # You can add extra information after the name (HTML format is supported), such as icons
     post = ""
-
     # Display name
     name = "Posts"
-
     # Weights are used to determine the ordering
     weight = 1
-  
+    
   [[menu.main]]
     identifier = "projects"
     name = "Projects"
     url = "/projects/"
     weight = 2
 
+  
+  [[menu.main]]
+    identifier = "cv"
+    name = "CV"
+    url = "/cv/"
+    weight = 3
+
   [[menu.main]]
     identifier = "tags"
     name = "Tags"
     url = "/tags/"
-    weight = 3
+    weight = 4
     
   [[menu.main]]
     identifier = "github"
     url = "https://github.com/gianfrancodemarco"
-    weight = 4
+    weight = 5
     pre = "<span data-feather='github'></span>"
 
   [[menu.main]]
     identifier = "linkedin"
     url = "https://it.linkedin.com/in/gianfranco-demarco-207288175"
-    weight = 5    
+    weight = 6    
     pre = "<span data-feather='linkedin'></span>"
 
   [[menu.main]]
     identifier = "email"
     url = "mailto:gianfrademarco@gmail.com"
-    weight = 6
+    weight = 7
     pre = "<span data-feather='at-sign'></span>"
 
 [markup]
