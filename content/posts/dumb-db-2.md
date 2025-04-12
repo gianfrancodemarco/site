@@ -301,19 +301,19 @@ Now let's see what happens when we add the Hash Index to the Append-Only Databas
 Most of the trade-offs of with indexing involves the startup time, since the index needs to be built from scratch.
 This operation scales linearly with the table size, and at 100k rows it takes around 600ms on this particular setup.
 
-![Hash Index Startup Time](/images/posts/dumb-db-2/DBMS_WITH_hash_indexes_startup_time.png)
+![Hash Index Startup Time](/images/posts/dumb-db-2/DBMS_with_hash_indexes_startup_time.png)
 
 Even if inserts require to update the index, we can see that the performance is practically the same as the regular Append-Only Database.
 
-![Hash Index Insert](/images/posts/dumb-db-2/DBMS_WITH_hash_indexes_insert_time.png)
+![Hash Index Insert](/images/posts/dumb-db-2/DBMS_with_hash_indexes_insert_time.png)
 
 However, we can observe the benefits of using an index for query operations when the primary key is the search key. Queries are now extremely fast—comparable to the performance of inserts. Moreover, the query time no longer increases with table size; a query on a table with 2,000 rows takes the same time as one on a table with 100,000 rows.
 
-![Hash Index Query](/images/posts/dumb-db-2/DBMS_WITH_hash_indexes_query_time.png)
+![Hash Index Query](/images/posts/dumb-db-2/DBMS_with_hash_indexes_query_time.png)
 
 With indexes, a query on a table with 100k rows takes around 0.125ms vs 91ms without indexes (a 728x improvement - and growing with the table size).
 
-![Hash Index Workload](/images/posts/dumb-db-2/DBMS_WITH_hash_indexes_mixed_workload_time.png)
+![Hash Index Workload](/images/posts/dumb-db-2/DBMS_with_hash_indexes_mixed_workload_time.png)
 
 Now also the mixed workload time is constant and orders of magnitude faster than the regular Append-Only Database.
 
