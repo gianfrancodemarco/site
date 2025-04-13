@@ -348,4 +348,4 @@ However, with minimal effort, the `AppendOnlyDBMSWithHashIndex` could be extende
 - [Python dictionary](https://mail.python.org/pipermail/python-list/2000-March/048085.html)
 - [PostgreSQL Hash Index](https://www.postgresql.org/docs/current/hash-index.html)
 - [Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems 1st Edition](https://www.oreilly.com/library/view/designing-data-intensive-applications/9781491903063/) by Martin Kleppmann
-- [DumbDB source code](https://github.com/gianfrancodemarco/dumbdb/tree/1.0.0-append-only-database)
+- [DumbDB source code](https://github.com/gianfrancodemarco/dumbdb/tree/2.0.0-append-only-database-hash-index)
