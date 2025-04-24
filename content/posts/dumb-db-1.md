@@ -1,5 +1,5 @@
 ---
-title: "DumbDB: Implementing a dumb DBMS from scratch - Part I: an Append-Only Database"
+title: "DumbDB I: an Append-Only Database"
 date: 2025-04-06
 description: ""
 type: "post"
@@ -9,6 +9,7 @@ summary: "Developing a dumb DBMS from scratch using Python - implement the most 
 image: /images/posts/dumb-db-1/hero.jpg
 showTableOfContents: true
 ---
+{{< dumbdb-series >}}
 
 Having a fundamental understanding of how databases work is crucial for developers - that's true even if you work as a frontend developer and you won't ever touch a database directly.
 

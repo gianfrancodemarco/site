@@ -1,0 +1,21 @@
+.dumbdb-series-index {
+    border-left: 4px solid #007bff;
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 4px;
+}
+
+.dumbdb-series-index h3 {
+    margin-top: 0;
+    color: #007bff;
+}
+
+.dumbdb-series-index ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+
+.dumbdb-series-index li {
+    margin: 0.5rem 0;
+}

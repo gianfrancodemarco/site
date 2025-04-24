@@ -1,0 +1,24 @@
+{{ $currentPage := .Page }}
+{{ $seriesPosts := where .Site.RegularPages "Type" "post" }}
+{{ $seriesPosts = where $seriesPosts "Params.tags" "intersect" (slice "Databases") }}
+{{ $seriesPosts = where $seriesPosts "Params.title" "like" "DumbDB" }}
+
+{{ if not (.Page.Scratch.Get "dumbdb-series-css-loaded") }}
+{{ .Page.Scratch.Set "dumbdb-series-css-loaded" true }}
+<link rel="stylesheet" href="/css/dumbdb-series.css">
+{{ end }}
+
+<div class="dumbdb-series-index">
+    <h3>DumbDB: Implementing a dumb DBMS from scratch</h3>
+    <ul>
+        {{ range $index, $post := $seriesPosts.ByDate }}
+        <li>
+            {{ if eq $post $currentPage }}
+            <strong>{{ add $index 1 }}. {{ $post.Title }}</strong>
+            {{ else }}
+            {{ add $index 1 }}. <a href="{{ $post.RelPermalink }}">{{ $post.Title }}</a>
+            {{ end }}
+        </li>
+        {{ end }}
+    </ul>
+</div>

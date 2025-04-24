@@ -1,5 +1,5 @@
 ---
-title: "DumbDB: Implementing a dumb DBMS from scratch - Part II: introducing the Hash Index"
+title: "DumbDB II: introducing the Hash Index"
 date: 2025-04-12
 description: ""
 type: "post"
@@ -9,6 +9,7 @@ summary: "Implementing a Hash Index in to boost the performance of the Append-On
 image: /images/posts/dumb-db-2/hero.jpg
 showTableOfContents: true
 ---
+{{< dumbdb-series >}}
 
 # Introduction
 
