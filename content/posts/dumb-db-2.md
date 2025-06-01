@@ -13,7 +13,7 @@ showTableOfContents: true
 
 # Introduction
 
-In the [previous post](https://gianfrancodemarco.dev/posts/dumb-db-1), we implemented an Append-Only Database using CSV files to store the data.  
+In the [previous post](/posts/dumb-db-1), we implemented an Append-Only Database using CSV files to store the data.  
 We have seen how inserts, updates and deletes perform really well, being implemented as a single append operation on the table file.  
 However, queries are not very efficient since scanning the entire table file to retrieve data scales poorly with table size.
 
