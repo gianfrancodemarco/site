@@ -1,6 +1,6 @@
 ---
 title: "DumbDB III: from text to results - an high-level overview"
-date: 2025-04-17
+date: 2025-06-01
 description: ""
 type: "post"
 tags: ["Python", "Databases", "Data Engineering"]
@@ -111,6 +111,8 @@ So, to produce a parser we will need to define:
 - an **AST** definition for DumbDB's SQL
 - a **parser** that applies the grammar rules to the list of tokens to produce the AST
 
+Many libraries are available to help with the implementation of a parser such as [PLY](https://www.dabeaz.com/ply/), but we will implement our own parser from scratch.
+
 | Component | Input | Output |
 |-----------|-------|--------|
 | Parser | List of tokens | Abstract Syntax Tree |
@@ -164,6 +166,7 @@ The AST has an entry level node which represent the specific query operation to 
 For example, a `SELECT` operation will be represented by the `SelectQuery` class.
 When the engine receives a `SelectQuery` object, it will call the `query` function of the DBMS object; if it receives a `CreateTableQuery` object, it will call the `create_table` function, and so on.
 
+
 | Component | Input | Output |
 |-----------|-------|--------|
 | Execution Engine | Physical Plan | Result |
@@ -172,6 +175,14 @@ When the engine receives a `SelectQuery` object, it will call the `query` functi
 
 Even if the DumbDB's execution engine is really simple, it is enough to execute the queries we have implemented so far.  
 ![DumbDB query execution](/images/posts/dumb-db-3/query-execution-flow.svg)
+
+| Component | Input | Output |
+|-----------|-------|--------|
+| Lexical Tokenizer | Textual SQL query | List of tokens |
+| Parser | List of tokens | Abstract Syntax Tree |
+| Planner (Not implemented in DumbDB) | Abstract Syntax Tree | Physical Plan |
+| Execution Engine | Physical Plan | Result |
+
 
 <img src="/images/posts/dumb-db-3/query-execution-flow.svg" alt="DumbDB query execution" width="50%" />
 
@@ -182,9 +193,10 @@ In the next posts we will dive into the details of each component.
 - [Read–eval–print loop](https://en.wikipedia.org/wiki/Read–eval–print_loop)
 - [Lexical analysis](https://en.wikipedia.org/wiki/Lexical_analysis)
 - [Parser](https://marketguard.io/glossary/parser#:~:text=A%20parser%20is%20a%20software,the%20case%20of%20programming%20languages)
+- [PLY](https://www.dabeaz.com/ply/ply.html)
 - [Abstract syntax tree](https://en.wikipedia.org/wiki/Abstract_syntax_tree#:~:text=This%20distinguishes%20abstract%20syntax%20trees,AST%20by%20means%20of%20subsequent)
 - [Physical plan](https://howqueryengineswork.com/07-physical-plan.html)
 - [Query optimization](https://en.wikipedia.org/wiki/Query_optimization)
 - [Relational algebra](https://db.in.tum.de/~grust/teaching/ss06/DBfA/db1-03.pdf)
 - [Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems 1st Edition](https://www.oreilly.com/library/view/designing-data-intensive-applications/9781491903063/) by Martin Kleppmann
-- [DumbDB source code](https://github.com/gianfrancodemarco/dumbdb/tree/2.0.0-append-only-database-hash-index)
+- [DumbDB source code](https://github.com/gianfrancodemarco/dumbdb/tree/3.0.0-parser)
