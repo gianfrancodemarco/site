@@ -92,8 +92,8 @@ enableRobotsTXT = true
     ordered = false
 
 [services]
-  [services.disqus]
-    shortname = 'gianfrancodemarco-dev'
+  # [services.disqus]
+  #   shortname = 'gianfrancodemarco-dev'
 
 
 # Google Analytics & Iubenda Cookie Consent
