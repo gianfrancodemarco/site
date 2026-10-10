@@ -1,3 +1,20 @@
+.header .nav-brand:hover,
+.header .nav-brand:focus-visible,
+.header .nav-title a:hover,
+.header .nav-title a:focus-visible,
+.header .nav-links .nav-link a:hover,
+.header .nav-links .nav-link a:focus-visible,
+.header .nav-hamburger-list a:hover,
+.header .nav-hamburger-list a:focus-visible {
+  color: inherit;
+  fill: inherit;
+}
+
+.header .nav-links .nav-link a:hover svg,
+.header .nav-hamburger-list a:hover svg {
+  stroke: currentColor;
+}
+
 /* Homepage post grid */
 .home-posts {
   width: min(920px, 92%);
