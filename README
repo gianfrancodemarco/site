@@ -13,6 +13,8 @@ Start the server:
 hugo server -DF
 ```
 
+Internal links are root-relative (`/posts/`, etc.), so any `hugo server` port works.
+
 
 ### Deploy
 

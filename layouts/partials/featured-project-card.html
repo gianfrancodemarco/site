@@ -1,0 +1,17 @@
+<div class="card project-card--featured m-0">
+    <p class="featured-eyebrow featured-eyebrow--inset">Featured build</p>
+    <a href="{{ .Params.githuburl }}" class="no-a-style" target="_blank" rel="noopener noreferrer">
+        <h2>{{ .Title }}</h2>
+        <p class="featured-card-meta">GitHub →</p>
+        <p>{{ .Summary }}</p>
+    </a>
+    {{ if isset .Params "tags" }}
+    <ul class="post-tags">
+        {{ range .Params.tags }}
+        <li class="post-tag mx-1 my-1">
+            <a href="/tags/{{ . | urlize }}/"><div class="tag-name">{{ . }}</div></a>
+        </li>
+        {{ end }}
+    </ul>
+    {{ end }}
+</div>

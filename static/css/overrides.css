@@ -15,6 +15,12 @@
   stroke: currentColor;
 }
 
+a.toolbox-chip:hover,
+a.toolbox-chip:focus-visible {
+  color: inherit;
+  fill: inherit;
+}
+
 /* Homepage post grid */
 .home-posts {
   width: min(920px, 92%);

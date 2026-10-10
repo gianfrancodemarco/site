@@ -1,0 +1,24 @@
+{{ with hugo.Data.toolbox }}
+<section class="toolbox-strip reveal-section" aria-label="{{ .label }}">
+    <p class="section-kicker">{{ .label }}</p>
+    <ul class="toolbox-list">
+        {{ range .items }}
+        {{ $label := . }}
+        {{ $tag := . }}
+        {{ if reflect.IsMap . }}
+            {{ $label = .label }}
+            {{ $tag = .tag | default .label }}
+        {{ end }}
+        {{ $tagPath := printf "/tags/%s/" ($tag | urlize) }}
+        {{ $tagPage := site.GetPage (printf "/tags/%s" ($tag | urlize)) }}
+        <li>
+            {{ if $tagPage }}
+            <a class="toolbox-chip" href="{{ $tagPath | relURL }}">{{ $label }}</a>
+            {{ else }}
+            <span class="toolbox-chip toolbox-chip--static">{{ $label }}</span>
+            {{ end }}
+        </li>
+        {{ end }}
+    </ul>
+</section>
+{{ end }}

@@ -1,5 +1,5 @@
 {{ define "main" }}
-<section class="home-about">
+<section class="home-about home-intro reveal-section">
     <div class="avatar">
         {{ if isset .Site.Params "avatarurl" }}
         <img class={{ .Site.Params.AvatarSize | default "size-m" }} src='{{ .Scratch.Get "avatarImgSrc" }}'
@@ -9,15 +9,18 @@
 
     <h1>{{ .Site.Title }}</h1>
     {{ if isset .Site.Params "description" }}
-    <h3>{{ .Site.Params.Description }}</h3>
+    <h3 class="home-tagline">{{ .Site.Params.Description }}</h3>
     {{ end }}
-
+    <p class="home-mission">Technical writing on data systems, AI engineering, and things I build in the open.</p>
 </section>
+
+{{- partial "now-strip.html" . -}}
+{{- partial "toolbox-strip.html" . -}}
 
 <div class="flex-break"></div>
 
 {{ if isset .Site.Params "socialicons" }}
-<section class="social-icons">
+<section class="social-icons reveal-section">
     <ul class="social-icons-list">
         {{ range .Site.Params.SocialIcons }}
         <li class="social-icon">
@@ -31,26 +34,39 @@
 {{ end }}
 
 {{ if os.FileExists "index-about.md" }}
-<div class="markdown-content">
+<div class="markdown-content reveal-section">
     {{ readFile "index-about.md" | markdownify }}
 </div>
 {{ end }}
 
+{{ $allPosts := union (where .Site.Pages "Params.type" "post") (where .Site.Pages "Params.type" "external-post") }}
+{{ $featuredPosts := where $allPosts "Params.featured" true }}
+{{ $featuredPost := cond (gt (len $featuredPosts) 0) (index $featuredPosts 0) nil }}
 
 {{ if isset .Site.Params "showpostsonhomepage" }}
+<section class="home-featured reveal-section">
+    {{ if $featuredPost }}
+    <div class="featured-slot">
+        {{- partial "featured-post-card.html" $featuredPost -}}
+    </div>
+    {{ end }}
+</section>
 
-<div class="home-posts list-posts">
-    <h2 class="text-center">{{ i18n (.Site.Params.ShowPostsOnHomePage | humanize) }} Posts</h2>
+<div class="home-posts list-posts reveal-section">
+    <h2 class="text-center section-title">{{ i18n (.Site.Params.ShowPostsOnHomePage | humanize) }} Posts</h2>
 
     <div class="post-grid">
-    {{ $posts := union (where .Site.Pages "Params.type" "post") (where .Site.Pages "Params.type" "external-post") }}
+    {{ $gridPosts := $allPosts }}
+    {{ if $featuredPost }}
+    {{ $gridPosts = where $allPosts "RelPermalink" "!=" $featuredPost.RelPermalink }}
+    {{ end }}
 
     {{ if eq .Site.Params.ShowPostsOnHomePage "popular" }}
-    {{ range $posts.ByWeight | first 4 }}
+    {{ range $gridPosts.ByWeight | first 4 }}
     {{- partial "list-posts.html" . -}}
     {{ end }}
     {{ else if eq .Site.Params.ShowPostsOnHomePage "recent" }}
-    {{ range $posts.ByDate.Reverse | first 4 }}
+    {{ range $gridPosts.ByDate.Reverse | first 4 }}
     {{- partial "list-posts.html" . -}}
     {{ end }}
     {{ end }}
@@ -60,25 +76,35 @@
         <a class="btn-all-posts" href="{{ "/posts/" | relURL }}">View all posts <span class="btn-all-posts-arrow" aria-hidden="true">→</span></a>
     </p>
 </div>
-
 {{ end }}
 
-{{ if isset .Site.Params "projects"}}
-<h2 class="text-center">{{ i18n (.Site.Params.ShowPostsOnHomePage | humanize) }} Projects </h2>
+{{ if .Site.Params.showProjectsOnHome }}
+{{ $projects := where .Site.Pages "Params.type" "project" }}
+{{ $featuredProjects := where $projects "Params.featured" true }}
+{{ $featuredProject := cond (gt (len $featuredProjects) 0) (index $featuredProjects 0) nil }}
 
-<div class="card-container my-2">
-    {{ $projects := where .Site.Pages "Params.type" "project" }}
-    {{ $projectCount := len $projects }}
-    {{ range $index, $project := $projects }}
-    {{- partial "list-projects.html" $project -}}
-    {{ if mod (add $index 1) 3 | eq 0 }}
-</div>
-<div class="card-container my-2">
-    {{ end }}
-    {{ end }}
-</div>
+<section class="home-projects reveal-section">
+    <h2 class="text-center section-title">Projects</h2>
 
+    <div class="project-showcase">
+    {{ $gridProjects := $projects }}
+    {{ if $featuredProject }}
+    {{ $gridProjects = where $projects "RelPermalink" "!=" $featuredProject.RelPermalink }}
+    <div class="project-showcase-cell">
+        {{- partial "featured-project-card.html" $featuredProject -}}
+    </div>
+    {{ end }}
+    {{ range $gridProjects.ByDate.Reverse | first 3 }}
+    <div class="project-showcase-cell">
+    {{- partial "list-projects.html" . -}}
+    </div>
+    {{ end }}
+    </div>
+
+    <p class="home-posts-footer text-center">
+        <a class="btn-all-posts" href="{{ "/projects/" | relURL }}">All projects <span class="btn-all-posts-arrow" aria-hidden="true">→</span></a>
+    </p>
+</section>
 {{ end }}
-
 
 {{ end }}

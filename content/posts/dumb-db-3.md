@@ -3,6 +3,7 @@ title: "DumbDB III: from text to results - an high-level overview"
 date: 2025-06-01
 description: ""
 type: "post"
+featured: true
 tags: ["Python", "Databases", "Data Engineering"]
 weight: 1
 summary: "An high-level overview of how a textual SQL query is processed by a DBMS to produce a result"

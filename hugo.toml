@@ -1,4 +1,5 @@
-baseURL = "https://gianfrancodemarco.dev/"
+# baseURL: development → config/development/hugo.toml (localhost).
+# Production deploy → .github/workflows/hugo.yaml (--baseURL).
 defaultContentLanguage = "en"
 languageCode = "en"
 
@@ -13,6 +14,7 @@ enableRobotsTXT = true
   avatarURL = "/images/avatar.jpg"
   description = "Data & AI Engineer | M.Sc. in Artificial Intelligence"
   showPostsOnHomePage = "popular"
+  showProjectsOnHome = true
   displayReadingTime = true
   footer = "Gianfranco Demarco"
 
@@ -25,8 +27,12 @@ enableRobotsTXT = true
   projects = []
 
   CustomHeadHTML = """
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/main.css">
   <link rel="stylesheet" href="/css/common.css">
+  <link rel="stylesheet" href="/css/technical.css">
   <link rel="stylesheet" href="/css/overrides.css">
   <link rel="stylesheet" href="/css/dark-overrides.css">
   <script src="/js/site.js" defer></script>

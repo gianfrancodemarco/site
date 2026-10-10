@@ -1,0 +1,19 @@
+{{/* Featured post — expects a Page context */}}
+<article class="featured-card featured-card--post post-card{{ if .Params.externalUrl }} is-external{{ end }}">
+    <p class="featured-eyebrow">Featured read</p>
+    {{ if .Params.externalUrl }}
+    {{- partial "external-link-badge.html" . -}}
+    <a href="{{ .Params.externalUrl }}" class="featured-card-link no-a-style" target="_blank" rel="noopener noreferrer">
+    {{ else }}
+    <a href="{{ .RelPermalink }}" class="featured-card-link no-a-style">
+    {{ end }}
+        {{ if isset .Params "image" }}
+        <div class="featured-card-media post-image" style="background-image: url('{{ .Params.image }}');"></div>
+        {{ end }}
+        <div class="featured-card-body">
+            <h2 class="post-title m-0">{{ .Title }}</h2>
+            <p class="featured-card-meta post-date">{{ dateFormat (or .Site.Params.dateFormat "January 2, 2006") .Date }}</p>
+            <p class="featured-card-summary">{{ .Params.summary }}</p>
+        </div>
+    </a>
+</article>

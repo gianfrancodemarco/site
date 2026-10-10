@@ -1,0 +1,44 @@
+{{ $page := .page }}
+{{ $title := .title }}
+{{ $tag := .tag }}
+{{ $titleMatch := .titleMatch }}
+
+{{ $posts := where site.RegularPages "Params.type" "in" (slice "post" "external-post") }}
+{{ if $tag }}
+{{ $posts = where $posts "Params.tags" "intersect" (slice $tag) }}
+{{ end }}
+
+{{ $filtered := slice }}
+{{ range $posts }}
+  {{ if $titleMatch }}
+    {{ if in .Title $titleMatch }}
+      {{ $filtered = $filtered | append . }}
+    {{ end }}
+  {{ else }}
+    {{ $filtered = $filtered | append . }}
+  {{ end }}
+{{ end }}
+{{ $posts = $filtered.ByDate }}
+
+{{ if not ($page.Scratch.Get "series-css-loaded") }}
+{{ $page.Scratch.Set "series-css-loaded" true }}
+<link rel="stylesheet" href="/css/series.css">
+{{ end }}
+
+<nav class="series-index" aria-label="Series index">
+    <p class="series-index-kicker">series</p>
+    <h3 class="series-index-title">{{ $title }}</h3>
+    <ol class="series-index-list">
+        {{ range $index, $post := $posts }}
+        <li>
+            {{ if eq $post.RelPermalink $page.RelPermalink }}
+            <strong>{{ add $index 1 }}. {{ $post.Title }}</strong>
+            {{ else if $post.Params.externalUrl }}
+            <a href="{{ $post.Params.externalUrl }}" target="_blank" rel="noopener noreferrer">{{ add $index 1 }}. {{ $post.Title }} ↗</a>
+            {{ else }}
+            <a href="{{ $post.RelPermalink }}">{{ add $index 1 }}. {{ $post.Title }}</a>
+            {{ end }}
+        </li>
+        {{ end }}
+    </ol>
+</nav>

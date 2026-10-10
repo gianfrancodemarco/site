@@ -200,3 +200,36 @@ html:has(#dark-theme:not([disabled])) .language-chip:hover {
 html:has(#dark-theme:not([disabled])) .language-chip .stars {
   color: var(--dm-accent);
 }
+
+html:has(#dark-theme:not([disabled])) {
+  --tech-border: var(--dm-border-strong);
+  --tech-surface: rgba(255, 255, 255, 0.03);
+  --tech-grid: rgba(255, 255, 255, 0.035);
+}
+
+html:has(#dark-theme:not([disabled])) .now-strip-inner,
+html:has(#dark-theme:not([disabled])) .featured-card,
+html:has(#dark-theme:not([disabled])) .series-index {
+  background: var(--dm-surface);
+  border-color: var(--dm-border);
+  box-shadow: none;
+}
+
+html:has(#dark-theme:not([disabled])) .featured-card:hover,
+html:has(#dark-theme:not([disabled])) .project-card--featured:hover {
+  box-shadow: 0 22px 56px rgba(0, 0, 0, 0.45);
+}
+
+html:has(#dark-theme:not([disabled])) .project-card--featured {
+  background: var(--dm-surface);
+  border-color: rgba(138, 180, 255, 0.35);
+}
+
+html:has(#dark-theme:not([disabled])) .toolbox-chip {
+  background: var(--dm-bg-elevated);
+  border-color: var(--dm-border);
+}
+
+html:has(#dark-theme:not([disabled])) .home-mission {
+  opacity: 0.78;
+}

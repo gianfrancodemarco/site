@@ -1,0 +1,24 @@
+{{ with hugo.Data.now }}
+<section class="now-strip reveal-section" aria-labelledby="now-heading">
+    <div class="now-strip-inner">
+        <p class="section-kicker" id="now-heading">// now</p>
+        <dl class="now-grid">
+            <div class="now-item">
+                <dt class="now-label">role</dt>
+                <dd class="now-value">{{ .role }}</dd>
+            </div>
+            <div class="now-item">
+                <dt class="now-label">focus</dt>
+                <dd class="now-value">{{ .focus }}</dd>
+            </div>
+            <div class="now-item">
+                <dt class="now-label">learning</dt>
+                <dd class="now-value">{{ .learning }}</dd>
+            </div>
+        </dl>
+        {{ with .updated }}
+        <p class="now-updated"><span class="now-label">updated</span> {{ . }}</p>
+        {{ end }}
+    </div>
+</section>
+{{ end }}
