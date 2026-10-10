@@ -1,9 +1,10 @@
-<article class="post-card m-4">
-    {{ if eq .Type "external-post" }}
+<article class="post-card m-4{{ if .Params.externalUrl }} is-external{{ end }}">
+    {{ if .Params.externalUrl }}
+    {{- partial "external-link-badge.html" . -}}
     <a href="{{ .Params.externalUrl }}" class="post-link no-a-style" target="_blank" rel="noopener noreferrer">
-        {{ else }}
-        <a href="{{ .RelPermalink }}" class="post-link no-a-style">
-            {{ end }}
+    {{ else }}
+    <a href="{{ .RelPermalink }}" class="post-link no-a-style">
+    {{ end }}
             {{ if isset .Params "image" }}
             <div class="post-image" style="background-image: url('{{ .Params.image }}');"></div>
             {{ end }}

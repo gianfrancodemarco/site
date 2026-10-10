@@ -42,12 +42,11 @@
   box-shadow: 10px 10px 16px var(--light-secondary-color);
 }
 
-.card h2, .post-card h2 {
-  color: var(--light-primary-color);
-}
-
-.card p, .post-card p {
-  color: var(--light-primary-color);
+.card h2,
+.post-card h2,
+.card p,
+.post-card p {
+  color: inherit;
 }
 
 /* Remove all styles from a of project containers */
