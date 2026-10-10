@@ -60,7 +60,7 @@ a.toolbox-chip:focus-visible {
   .post-grid .post-image {
     width: 100%;
     max-width: 100%;
-    background-position: center 28%;
+    object-position: center 28%;
   }
 
   .post-grid .post-card .p-4 {

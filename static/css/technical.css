@@ -148,8 +148,11 @@ a.toolbox-chip:focus-visible {
   color: inherit;
 }
 
-.featured-card-media {
-  height: 220px !important;
+.featured-card-media-wrap .featured-card-media.post-image,
+.featured-card-media-wrap .post-image {
+  height: 220px;
+  object-fit: cover;
+  object-position: center 28%;
 }
 
 .featured-card--post .featured-card-body {
@@ -237,11 +240,11 @@ a.toolbox-chip:focus-visible {
     width: 100%;
   }
 
-  .featured-card-media.post-image,
+  .featured-card-media-wrap .post-image,
   .home-posts .post-image {
-    height: clamp(10.5rem, 36vw, 13.75rem) !important;
-    background-position: center 28%;
-    background-size: cover;
+    height: clamp(10.5rem, 36vw, 13.75rem);
+    object-fit: cover;
+    object-position: center 28%;
   }
 
   .featured-card--post .featured-card-body {

@@ -1,0 +1,18 @@
+{{/* Post hero — pass dict: page, class (optional), lazy (optional bool, default true) */}}
+{{ $page := .page }}
+{{ if and $page (isset $page.Params "image") }}
+{{ $img := $page.Params.image }}
+{{ $class := .class | default "post-image" }}
+{{ $lazy := default true .lazy }}
+{{ $webp := replaceRE "\\.(jpg|jpeg|png|JPG|PNG)$" ".webp" $img }}
+<picture class="post-hero-media">
+    <source srcset="{{ $webp | relURL }}" type="image/webp">
+    <img class="{{ $class }}"
+        src="{{ $img | relURL }}"
+        alt=""
+        width="1400"
+        height="788"
+        decoding="async"
+        {{ if $lazy }}loading="lazy"{{ else }}loading="eager" fetchpriority="high"{{ end }}>
+</picture>
+{{ end }}

@@ -6,7 +6,7 @@ type: "post"
 tags: ["Databases", "Data Engineering", "ETL"]
 weight: 1
 summary: ""
-image: /images/posts/Data_Engineering_Design_Patterns/hero.png
+image: /images/posts/Data_Engineering_Design_Patterns/hero.jpg
 showTableOfContents: true
 readTime: 10
 

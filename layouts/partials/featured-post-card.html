@@ -11,7 +11,7 @@
     {{ end }}
         {{ if isset .Params "image" }}
         <div class="featured-card-media-wrap">
-            <div class="featured-card-media post-image" style="background-image: url('{{ .Params.image }}');"></div>
+            {{- partial "post-hero-media.html" (dict "page" . "class" "featured-card-media post-image" "lazy" false) -}}
         </div>
         {{ end }}
         <div class="featured-card-body">

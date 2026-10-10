@@ -6,7 +6,7 @@
     <a href="{{ .RelPermalink }}" class="post-link no-a-style">
     {{ end }}
             {{ if isset .Params "image" }}
-            <div class="post-image" style="background-image: url('{{ .Params.image }}');"></div>
+            {{- partial "post-hero-media.html" (dict "page" . "lazy" true) -}}
             {{ end }}
             <div class="p-4">
                 <h2 class="post-title m-0">{{ .Title }}</h2>

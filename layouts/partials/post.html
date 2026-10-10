@@ -2,7 +2,7 @@
 
 <div class="post container">
     {{ if isset .Params "image" }}
-    <div class="post-image-big" style="background-image: url('{{ .Params.image }}');"></div>
+    {{- partial "post-hero-media.html" (dict "page" . "class" "post-image-big" "lazy" false) -}}
     {{ end }}
     <div class="post-header-section">
         <h1>{{ .Title }}</h1>

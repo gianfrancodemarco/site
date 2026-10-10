@@ -85,19 +85,35 @@
   transition: transform 0.2s;
 }
 
+.post-image-wrap,
+.featured-card-media-wrap .post-image-wrap {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+}
+
 .post-image {
   width: 100%;
   height: 300px;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: 0% 15%;
+  object-fit: cover;
+  object-position: center 28%;
+  display: block;
+}
+
+.post-image-big-wrap {
+  display: block;
+  width: 100%;
+  max-width: 100%;
 }
 
 .post-image-big {
   width: 100%;
-  padding-top: 56.25%;
-  background-size: contain;
-  background-repeat: no-repeat;
+  height: auto;
+  max-height: min(72vh, 520px);
+  object-fit: contain;
+  object-position: center top;
+  display: block;
+  margin: 0 auto;
 }
 
 .flex-break {
