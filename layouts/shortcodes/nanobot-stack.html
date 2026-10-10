@@ -1,0 +1,29 @@
+<figure class="layer-stack" aria-label="Nanobot on Android: stack from Telegram down to the OS">
+  <figcaption class="layer-stack__caption">Stack overview (simplified)</figcaption>
+  <ol class="layer-stack__list">
+    <li class="layer-stack__item layer-stack__item--edge">
+      <span class="layer-stack__name">Telegram</span>
+      <span class="layer-stack__detail">Messages to and from you</span>
+    </li>
+    <li class="layer-stack__connector" aria-hidden="true"><span>↓</span></li>
+    <li class="layer-stack__item layer-stack__item--app">
+      <span class="layer-stack__name">Nanobot gateway</span>
+      <span class="layer-stack__detail">Python · virtualenv · <code>nanobot gateway</code></span>
+    </li>
+    <li class="layer-stack__connector" aria-hidden="true"><span>↓</span></li>
+    <li class="layer-stack__item layer-stack__item--linux">
+      <span class="layer-stack__name">Debian ARM64</span>
+      <span class="layer-stack__detail"><code>proot-distro</code> — Linux userspace, not a VM</span>
+    </li>
+    <li class="layer-stack__connector" aria-hidden="true"><span>↓</span></li>
+    <li class="layer-stack__item layer-stack__item--termux">
+      <span class="layer-stack__name">Termux</span>
+      <span class="layer-stack__detail">ARM64 · tmux · boot scripts · logs</span>
+    </li>
+    <li class="layer-stack__connector" aria-hidden="true"><span>↓</span></li>
+    <li class="layer-stack__item layer-stack__item--os">
+      <span class="layer-stack__name">Android</span>
+      <span class="layer-stack__detail">OEM battery policy · boot delivery · background limits</span>
+    </li>
+  </ol>
+</figure>

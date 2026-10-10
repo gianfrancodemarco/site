@@ -4,7 +4,12 @@
         {{ if isset .Site.Params "avatarurl" }}
         <div class="avatar">
             <a href="{{ "/" | relURL }}">
-                <img src='{{ .Scratch.Get "avatarImgSrc" }}' alt="{{ .Site.Params.AvatarAltText|default "avatar" }}" />
+                {{ $avatar := .Scratch.Get "avatarImgSrc" }}
+                {{ $avatarWebp := replaceRE "\\.(jpg|jpeg|png|JPG|PNG)(\\?.*)?$" ".webp" $avatar }}
+                <picture>
+                    <source srcset="{{ $avatarWebp }}" type="image/webp">
+                    <img src="{{ $avatar }}" alt="{{ .Site.Params.AvatarAltText|default "avatar" }}" width="112" height="112" decoding="async" loading="eager">
+                </picture>
             </a>
         </div>
         {{ end }}

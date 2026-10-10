@@ -1,0 +1,163 @@
+/* Reusable post blocks: TL;DR, layer diagrams */
+
+.post-tldr {
+  margin: 1.5rem 0 2rem;
+  padding: 1.15rem 1.25rem 1.2rem;
+  border-radius: 12px;
+  border: 1px solid var(--tech-border, rgba(0, 0, 0, 0.12));
+  border-left: 4px solid color-mix(in srgb, #6366f1 55%, var(--tech-border, #ccc));
+  background: var(--tech-surface, rgba(0, 0, 0, 0.025));
+  box-shadow: 0 10px 32px rgba(15, 23, 42, 0.06);
+}
+
+.post-tldr__label {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin: 0 0 0.75rem;
+  opacity: 0.75;
+}
+
+.post-tldr__body {
+  font-size: 0.96rem;
+  line-height: 1.55;
+}
+
+.post-tldr__body > :first-child {
+  margin-top: 0;
+}
+
+.post-tldr__body > :last-child {
+  margin-bottom: 0;
+}
+
+.post-tldr__body ul {
+  margin: 0;
+  padding-left: 1.15rem;
+}
+
+.post-tldr__body li {
+  margin: 0.45rem 0;
+}
+
+.post-tldr__body li::marker {
+  color: color-mix(in srgb, currentColor 45%, transparent);
+}
+
+/* Vertical layer stack diagram */
+.layer-stack {
+  margin: 1.35rem 0 1.75rem;
+  padding: 0;
+  border: none;
+}
+
+.layer-stack__caption {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: lowercase;
+  opacity: 0.65;
+  margin-bottom: 0.85rem;
+  text-align: center;
+}
+
+.layer-stack__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-width: 28rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.layer-stack__item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.85rem 1rem;
+  border-radius: 10px;
+  border: 1px solid var(--tech-border, rgba(0, 0, 0, 0.1));
+  background: var(--tech-surface, rgba(0, 0, 0, 0.025));
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05);
+}
+
+.layer-stack__item--edge {
+  border-color: color-mix(in srgb, #229ed9 35%, var(--tech-border, #ccc));
+  background: color-mix(in srgb, #229ed9 6%, var(--tech-surface, #fff));
+}
+
+.layer-stack__item--app {
+  border-color: color-mix(in srgb, #6366f1 35%, var(--tech-border, #ccc));
+  background: color-mix(in srgb, #6366f1 7%, var(--tech-surface, #fff));
+}
+
+.layer-stack__item--linux {
+  border-color: color-mix(in srgb, #c026d3 30%, var(--tech-border, #ccc));
+  background: color-mix(in srgb, #c026d3 6%, var(--tech-surface, #fff));
+}
+
+.layer-stack__item--termux {
+  border-color: color-mix(in srgb, #16a34a 30%, var(--tech-border, #ccc));
+  background: color-mix(in srgb, #16a34a 6%, var(--tech-surface, #fff));
+}
+
+.layer-stack__item--os {
+  border-color: color-mix(in srgb, #ea580c 28%, var(--tech-border, #ccc));
+  background: color-mix(in srgb, #ea580c 5%, var(--tech-surface, #fff));
+}
+
+.layer-stack__name {
+  font-weight: 650;
+  font-size: 0.98rem;
+  letter-spacing: -0.01em;
+}
+
+.layer-stack__detail {
+  font-size: 0.82rem;
+  line-height: 1.45;
+  opacity: 0.88;
+}
+
+.layer-stack__detail code {
+  font-size: 0.78rem;
+}
+
+.layer-stack__connector {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 1.35rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.layer-stack__connector span {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.85rem;
+  line-height: 1;
+  opacity: 0.45;
+}
+
+@media (max-width: 720px) {
+  .post-tldr {
+    padding: 1rem 1rem 1.05rem;
+  }
+
+  .layer-stack__item {
+    padding: 0.75rem 0.85rem;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .layer-stack__item {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .layer-stack__item:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 22px rgba(15, 23, 42, 0.08);
+  }
+}

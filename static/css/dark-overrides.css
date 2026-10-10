@@ -232,3 +232,41 @@ html:has(#dark-theme:not([disabled])) .toolbox-chip {
 html:has(#dark-theme:not([disabled])) .home-mission {
   opacity: 0.78;
 }
+
+html:has(#dark-theme:not([disabled])) .post-tldr {
+  background: var(--dm-surface);
+  border-color: var(--dm-border);
+  border-left-color: rgba(138, 180, 255, 0.55);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+}
+
+html:has(#dark-theme:not([disabled])) .layer-stack__item {
+  background: var(--dm-bg-elevated);
+  border-color: var(--dm-border-strong);
+  box-shadow: none;
+}
+
+html:has(#dark-theme:not([disabled])) .layer-stack__item--edge {
+  background: color-mix(in srgb, #229ed9 12%, var(--dm-bg-elevated));
+  border-color: color-mix(in srgb, #229ed9 35%, var(--dm-border));
+}
+
+html:has(#dark-theme:not([disabled])) .layer-stack__item--app {
+  background: color-mix(in srgb, #6366f1 14%, var(--dm-bg-elevated));
+  border-color: color-mix(in srgb, #6366f1 35%, var(--dm-border));
+}
+
+html:has(#dark-theme:not([disabled])) .layer-stack__item--linux {
+  background: color-mix(in srgb, #c026d3 12%, var(--dm-bg-elevated));
+  border-color: color-mix(in srgb, #c026d3 32%, var(--dm-border));
+}
+
+html:has(#dark-theme:not([disabled])) .layer-stack__item--termux {
+  background: color-mix(in srgb, #16a34a 12%, var(--dm-bg-elevated));
+  border-color: color-mix(in srgb, #16a34a 32%, var(--dm-border));
+}
+
+html:has(#dark-theme:not([disabled])) .layer-stack__item--os {
+  background: color-mix(in srgb, #ea580c 10%, var(--dm-bg-elevated));
+  border-color: color-mix(in srgb, #ea580c 30%, var(--dm-border));
+}
