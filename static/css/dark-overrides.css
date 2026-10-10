@@ -1,0 +1,202 @@
+/*
+ * Dark mode refresh — loaded after site CSS; active when Gokarna dark stylesheet is enabled.
+ */
+html:has(#dark-theme:not([disabled])) {
+  color-scheme: dark;
+
+  --dm-bg: #0c0e12;
+  --dm-bg-elevated: #141820;
+  --dm-surface: #1a1f2a;
+  --dm-surface-hover: #222836;
+  --dm-border: rgba(255, 255, 255, 0.09);
+  --dm-border-strong: rgba(255, 255, 255, 0.14);
+  --dm-text: #e8ecf4;
+  --dm-text-muted: #9aa3b2;
+  --dm-accent: #8ab4ff;
+
+  --accent-color: var(--dm-accent);
+}
+
+html:has(#dark-theme:not([disabled])),
+html:has(#dark-theme:not([disabled])) body {
+  background-color: var(--dm-bg);
+  color: var(--dm-text);
+  fill: var(--dm-text);
+}
+
+html:has(#dark-theme:not([disabled])) .header {
+  background-color: rgba(12, 14, 18, 0.88);
+  border-bottom: 1px solid var(--dm-border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+html:has(#dark-theme:not([disabled])) .header.header-shadow {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+}
+
+html:has(#dark-theme:not([disabled])) .nav-hamburger-list {
+  background: var(--dm-bg-elevated);
+  border: 1px solid var(--dm-border);
+}
+
+html:has(#dark-theme:not([disabled])) .post-date,
+html:has(#dark-theme:not([disabled])) .post .post-date {
+  color: var(--dm-text-muted);
+}
+
+/* Cards & project tiles */
+html:has(#dark-theme:not([disabled])) .post-card,
+html:has(#dark-theme:not([disabled])) .card {
+  background: var(--dm-surface);
+  border-color: var(--dm-border);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
+}
+
+html:has(#dark-theme:not([disabled])) .post-card:hover,
+html:has(#dark-theme:not([disabled])) .card:hover {
+  border-color: var(--dm-border-strong);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+}
+
+html:has(#dark-theme:not([disabled])) .home-posts .post-card.reveal-on-scroll.is-visible:hover {
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* Tags — avoid harsh white invert from theme dark.css */
+html:has(#dark-theme:not([disabled])) .post-tags .post-tag {
+  border-color: var(--dm-border-strong);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+html:has(#dark-theme:not([disabled])) .post-tags .post-tag:hover {
+  background: var(--dm-surface-hover);
+  color: var(--dm-text);
+}
+
+html:has(#dark-theme:not([disabled])) .tags-list .post-tags .post-tag a .tag-posts-count {
+  background-color: var(--dm-bg-elevated);
+}
+
+html:has(#dark-theme:not([disabled])) .tags-list .post-tags .post-tag:hover a .tag-posts-count {
+  background-color: var(--dm-surface-hover);
+  color: var(--dm-text);
+}
+
+/* Buttons & footer CTA */
+html:has(#dark-theme:not([disabled])) .btn-all-posts {
+  border-color: var(--dm-border-strong);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+html:has(#dark-theme:not([disabled])) .btn-all-posts:hover,
+html:has(#dark-theme:not([disabled])) .btn-all-posts:focus-visible {
+  border-color: rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+html:has(#dark-theme:not([disabled])) .reading-progress {
+  opacity: 0.55;
+}
+
+html:has(#dark-theme:not([disabled])) .external-badge {
+  background: var(--dm-surface);
+  border-color: var(--dm-border-strong);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+}
+
+html:has(#dark-theme:not([disabled])) .external-badge svg,
+html:has(#dark-theme:not([disabled])) .external-badge--inline svg {
+  stroke: var(--dm-text);
+}
+
+/* Prose & code */
+html:has(#dark-theme:not([disabled])) blockquote {
+  color: var(--dm-text-muted);
+  border-left-color: var(--dm-border-strong);
+}
+
+html:has(#dark-theme:not([disabled])) hr {
+  border-color: var(--dm-border);
+}
+
+html:has(#dark-theme:not([disabled])) code,
+html:has(#dark-theme:not([disabled])) pre {
+  background-color: var(--dm-bg-elevated) !important;
+  border: 1px solid var(--dm-border);
+}
+
+html:has(#dark-theme:not([disabled])) :not(pre) > code {
+  background-color: var(--dm-surface) !important;
+  color: var(--dm-text);
+}
+
+html:has(#dark-theme:not([disabled])) table thead {
+  background-color: var(--dm-surface);
+}
+
+html:has(#dark-theme:not([disabled])) table td,
+html:has(#dark-theme:not([disabled])) table th {
+  border-bottom-color: var(--dm-border);
+}
+
+html:has(#dark-theme:not([disabled])) .footer {
+  border-top-color: var(--dm-border);
+  color: var(--dm-text-muted);
+}
+
+html:has(#dark-theme:not([disabled])) .arrow-logo {
+  background-color: var(--dm-surface);
+}
+
+html:has(#dark-theme:not([disabled])) .social-icons-list .social-icon a:hover {
+  fill: var(--dm-text);
+}
+
+/* CV page */
+html:has(#dark-theme:not([disabled])) .cv-page h1,
+html:has(#dark-theme:not([disabled])) .cv-header .role {
+  color: var(--dm-text);
+}
+
+html:has(#dark-theme:not([disabled])) .timeline-date {
+  background-color: var(--dm-bg);
+  color: var(--dm-accent);
+  box-shadow: 0 0 0 4px var(--dm-bg);
+}
+
+html:has(#dark-theme:not([disabled])) .timeline::after {
+  background-color: var(--dm-border-strong);
+}
+
+html:has(#dark-theme:not([disabled])) .timeline::before {
+  border-left-color: var(--dm-border-strong);
+}
+
+html:has(#dark-theme:not([disabled])) .timeline-content h3,
+html:has(#dark-theme:not([disabled])) .timeline-content li strong,
+html:has(#dark-theme:not([disabled])) .timeline-content a {
+  color: var(--dm-accent);
+}
+
+html:has(#dark-theme:not([disabled])) .timeline-content a:hover {
+  color: #b8d4ff;
+}
+
+html:has(#dark-theme:not([disabled])) .skill-chip,
+html:has(#dark-theme:not([disabled])) .language-chip {
+  background-color: var(--dm-surface);
+  border-color: var(--dm-border-strong);
+  color: var(--dm-text);
+}
+
+html:has(#dark-theme:not([disabled])) .skill-chip:hover,
+html:has(#dark-theme:not([disabled])) .language-chip:hover {
+  background-color: var(--dm-surface-hover);
+  border-color: rgba(138, 180, 255, 0.45);
+  color: var(--dm-text);
+}
+
+html:has(#dark-theme:not([disabled])) .language-chip .stars {
+  color: var(--dm-accent);
+}

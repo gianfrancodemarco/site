@@ -88,15 +88,6 @@
   display: block;
 }
 
-html:has(#dark-theme:not([disabled])) .external-badge {
-  background: rgba(45, 51, 59, 0.95);
-  border-color: rgba(255, 255, 255, 0.15);
-}
-
-html:has(#dark-theme:not([disabled])) .external-badge svg {
-  stroke: #f3f4f6;
-}
-
 .external-badge--inline {
   position: static;
   display: inline-flex;
