@@ -39,6 +39,37 @@ a.toolbox-chip:focus-visible {
 @media (max-width: 720px) {
   .post-grid {
     grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .home-posts {
+    width: 100%;
+    max-width: none;
+  }
+
+  .post-grid .post-card {
+    width: 100%;
+    max-width: none;
+    box-sizing: border-box;
+  }
+
+  .post-grid .post-link {
+    display: block;
+  }
+
+  .post-grid .post-image {
+    width: 100%;
+    max-width: 100%;
+    background-position: center 28%;
+  }
+
+  .post-grid .post-card .p-4 {
+    padding: 0.85rem 1rem 1rem !important;
+  }
+
+  .post-grid .post-title {
+    font-size: clamp(1rem, 4.2vw, 1.2rem);
+    line-height: 1.3;
   }
 }
 

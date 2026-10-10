@@ -64,12 +64,6 @@ main#content {
   width: 100%;
 }
 
-@media (max-width: 480px) {
-  .now-code {
-    font-size: 0.72rem;
-    padding: 0.95rem 0.85rem;
-  }
-}
 
 .now-strip .section-kicker {
   margin-bottom: 0.5rem;
@@ -78,7 +72,10 @@ main#content {
 .now-code-wrap {
   border: 1px solid var(--tech-border);
   border-radius: 12px;
-  overflow: auto;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
   background: var(--py-bg, #1e1e1e);
   box-shadow: 0 12px 40px rgba(15, 23, 42, 0.12);
   max-width: 100%;
@@ -87,15 +84,14 @@ main#content {
 .now-code {
   margin: 0;
   padding: 1.1rem 1.2rem 1rem;
-  overflow-x: auto;
   font-family: var(--font-mono);
   font-size: 0.78rem;
   line-height: 1.65;
   tab-size: 4;
   color: var(--py-fg, #d4d4d4);
-  white-space: pre-wrap;
-  word-break: break-word;
-  overflow-wrap: anywhere;
+  white-space: pre;
+  word-break: normal;
+  overflow-wrap: normal;
 }
 
 .now-code code {
@@ -152,8 +148,7 @@ main#content {
 
 .now-code .py-str {
   color: var(--py-string, #ce9178);
-  white-space: pre-wrap;
-  overflow-wrap: anywhere;
+  white-space: pre;
 }
 
 .now-code .py-paren {
@@ -328,6 +323,61 @@ a.toolbox-chip:focus-visible {
 @media (max-width: 720px) {
   .project-showcase {
     grid-template-columns: 1fr;
+  }
+
+  .now-strip,
+  .toolbox-strip,
+  .home-featured,
+  .home-posts {
+    width: 100%;
+    max-width: none;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .now-strip {
+    margin-top: 1.35rem;
+  }
+
+  .now-code-wrap {
+    border-radius: 10px;
+  }
+
+  .now-code {
+    font-size: clamp(0.64rem, 3.1vw, 0.74rem);
+    padding: 0.85rem 0.8rem 0.8rem;
+    line-height: 1.55;
+  }
+
+  .toolbox-list {
+    gap: 0.4rem;
+    padding: 0 0.15rem;
+  }
+
+  .featured-slot {
+    width: 100%;
+  }
+
+  .featured-card-media.post-image,
+  .home-posts .post-image {
+    height: clamp(10.5rem, 36vw, 13.75rem) !important;
+    background-position: center 28%;
+    background-size: cover;
+  }
+
+  .featured-card--post .featured-card-body {
+    padding: 1.05rem 1rem 1.2rem;
+  }
+
+  .featured-card .post-title {
+    font-size: clamp(1.05rem, 4.5vw, 1.25rem);
+    line-height: 1.3;
+  }
+
+  .featured-eyebrow {
+    top: 10px;
+    left: 10px;
+    font-size: 0.58rem;
   }
 }
 
