@@ -2,7 +2,7 @@
     {{ if eq .Type "external-post" }}
     <a href="{{ .Params.externalUrl }}" class="post-link no-a-style" target="_blank" rel="noopener noreferrer">
         {{ else }}
-        <a href="{{ .Permalink }}" class="post-link no-a-style">
+        <a href="{{ .RelPermalink }}" class="post-link no-a-style">
             {{ end }}
             {{ if isset .Params "image" }}
             <div class="post-image" style="background-image: url('{{ .Params.image }}');"></div>
@@ -24,7 +24,6 @@
                     </a>
                 </li>
                 {{end}}
-                </p>
         </ul>
         {{end}}
 

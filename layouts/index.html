@@ -42,6 +42,7 @@
 <div class="home-posts list-posts">
     <h2 class="text-center">{{ i18n (.Site.Params.ShowPostsOnHomePage | humanize) }} Posts</h2>
 
+    <div class="post-grid">
     {{ $posts := union (where .Site.Pages "Params.type" "post") (where .Site.Pages "Params.type" "external-post") }}
 
     {{ if eq .Site.Params.ShowPostsOnHomePage "popular" }}
@@ -53,6 +54,11 @@
     {{- partial "list-posts.html" . -}}
     {{ end }}
     {{ end }}
+    </div>
+
+    <p class="home-posts-footer text-center">
+        <a class="btn-all-posts" href="{{ "/posts/" | relURL }}">View all posts →</a>
+    </p>
 </div>
 
 {{ end }}

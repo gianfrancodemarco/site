@@ -2,3 +2,8 @@ public
 server
 .history
 .DS_STORE
+theme-demos/themes/
+theme-demos/shared-overlay/
+theme-demos/**/node_modules/
+theme-demos/**/hugo_stats.json
+theme-demos/**/.hugo_build.lock

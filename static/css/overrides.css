@@ -1,0 +1,67 @@
+/* Homepage post grid */
+.home-posts {
+  width: min(920px, 92%);
+}
+
+.post-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.post-grid .post-card {
+  margin: 0 !important;
+}
+
+@media (max-width: 720px) {
+  .post-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Round tag chips */
+.post-tags .post-tag {
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.post-tags .post-tag .tag-name {
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+}
+
+.home-posts-footer {
+  margin-top: 1.75rem;
+}
+
+.btn-all-posts {
+  display: inline-block;
+  padding: 0.55rem 1.15rem;
+  border-radius: 999px;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1.5px solid var(--light-secondary-color, #ddd);
+  color: inherit;
+  transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease;
+}
+
+.btn-all-posts:hover,
+.btn-all-posts:focus-visible {
+  color: inherit;
+  border-color: var(--light-secondary-color, #bbb);
+  background: color-mix(in srgb, currentColor 6%, transparent);
+  transform: translateY(-1px);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .home-posts .post-card.reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
+  .home-posts .post-card.reveal-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

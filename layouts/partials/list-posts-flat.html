@@ -2,7 +2,7 @@
     {{ if eq .Type "external-post" }}
     <a href="{{ .Params.externalUrl }}" class="post-link" target="_blank" rel="noopener noreferrer">{{ .Title }}</a>
     {{ else }}
-    <a href="{{ .Permalink }}" class="post-link">{{ .Title }}</a>
+    <a href="{{ .RelPermalink }}" class="post-link">{{ .Title }}</a>
     {{ end }}
     <div class="flex-break"></div>
     <span class="post-date">{{ dateFormat (or .Site.Params.dateFormat "January 2, 2006") .Date}}</span>
