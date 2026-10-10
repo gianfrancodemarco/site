@@ -1,0 +1,227 @@
+/* Motion pack — respects prefers-reduced-motion via JS skipping + these overrides */
+
+/* Terminal hero */
+.home-terminal {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  max-width: 38rem;
+  margin: 0.85rem auto 0;
+  padding: 0.55rem 0.75rem;
+  font-family: var(--font-mono);
+  font-size: clamp(0.72rem, 3vw, 0.82rem);
+  line-height: 1.5;
+  border-radius: 8px;
+  border: 1px solid var(--tech-border);
+  background: color-mix(in srgb, var(--tech-surface) 80%, transparent);
+  cursor: pointer;
+  text-align: left;
+  color: inherit;
+}
+
+.home-terminal:hover,
+.home-terminal:focus-visible {
+  border-color: color-mix(in srgb, currentColor 22%, var(--tech-border));
+  outline: none;
+}
+
+.home-terminal-prompt {
+  color: var(--py-name, #4ec9b0);
+  user-select: none;
+}
+
+.home-terminal-text {
+  opacity: 0.92;
+}
+
+.home-terminal-cursor {
+  display: inline-block;
+  width: 0.55em;
+  color: var(--py-keyword, #569cd6);
+  animation: terminal-cursor-blink 1s step-end infinite;
+}
+
+.home-terminal-cursor::before {
+  content: "▋";
+}
+
+@keyframes terminal-cursor-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Home boot sequence */
+.reveal-section.boot-wait {
+  opacity: 0;
+  transform: translateY(18px);
+}
+
+/* Grid parallax (subtle) */
+main#content.grid-parallax {
+  will-change: background-position;
+}
+
+/* Featured scan line */
+.featured-card-media-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.featured-card-media-wrap::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -40%;
+  height: 28%;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(255, 255, 255, 0.07),
+    transparent
+  );
+  animation: featured-scan 4.5s ease-in-out infinite;
+  opacity: 0.55;
+}
+
+@keyframes featured-scan {
+  0%,
+  100% {
+    transform: translateY(-120%);
+    opacity: 0;
+  }
+  45% {
+    opacity: 0.55;
+  }
+  55% {
+    transform: translateY(320%);
+    opacity: 0.35;
+  }
+}
+
+/* Post heading anchors */
+.post-content .heading-anchor {
+  float: left;
+  margin-left: -1.25rem;
+  padding-right: 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  opacity: 0;
+  text-decoration: none;
+  color: inherit;
+  transition: opacity 0.15s ease;
+}
+
+.post-content h2:hover .heading-anchor,
+.post-content h3:hover .heading-anchor,
+.post-content h4:hover .heading-anchor,
+.post-content h2:focus-within .heading-anchor,
+.post-content h3:focus-within .heading-anchor,
+.post-content h4:focus-within .heading-anchor {
+  opacity: 0.55;
+}
+
+.post-content .heading-anchor:focus-visible {
+  opacity: 1;
+}
+
+/* Code copy */
+.post-content pre {
+  position: relative;
+}
+
+.code-copy-btn {
+  position: absolute;
+  top: 0.45rem;
+  right: 0.45rem;
+  z-index: 2;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.45rem;
+  border-radius: 6px;
+  border: 1px solid var(--tech-border, rgba(0, 0, 0, 0.15));
+  background: color-mix(in srgb, Canvas 92%, transparent);
+  color: inherit;
+  cursor: pointer;
+  opacity: 0.85;
+  transition: opacity 0.15s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.code-copy-btn:hover,
+.code-copy-btn:focus-visible {
+  opacity: 1;
+  outline: none;
+}
+
+.code-copy-btn.is-copied {
+  border-color: color-mix(in srgb, #3dd68c 55%, var(--tech-border));
+  background: color-mix(in srgb, #3dd68c 18%, transparent);
+}
+
+/* Series sticky bar */
+.series-sticky {
+  position: fixed;
+  top: 50px;
+  left: 0;
+  right: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  padding: 0.45rem 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid var(--tech-border, rgba(0, 0, 0, 0.12));
+  background: color-mix(in srgb, Canvas 94%, transparent);
+  backdrop-filter: blur(8px);
+  transform: translateY(-110%);
+  opacity: 0;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.35s ease;
+  pointer-events: none;
+}
+
+.series-sticky.is-visible {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.series-sticky a {
+  color: inherit;
+  text-decoration: none;
+  opacity: 0.85;
+}
+
+.series-sticky a:hover {
+  text-decoration: underline;
+}
+
+/* Toolbox VS Code focus ring */
+a.toolbox-chip:focus-visible {
+  outline: 2px solid color-mix(in srgb, #569cd6 65%, transparent);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 3px color-mix(in srgb, #569cd6 22%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .featured-card-media-wrap::after {
+    animation: none;
+    display: none;
+  }
+
+  .home-terminal-cursor {
+    animation: none;
+  }
+
+  .series-sticky {
+    transition: none;
+  }
+
+}

@@ -20,12 +20,20 @@
 {{ end }}
 {{ $posts = $filtered.ByDate }}
 
+{{ $total := len $posts }}
+{{ $current := 0 }}
+{{ range $index, $post := $posts }}
+  {{ if eq $post.RelPermalink $page.RelPermalink }}
+    {{ $current = add $index 1 }}
+  {{ end }}
+{{ end }}
+
 {{ if not ($page.Scratch.Get "series-css-loaded") }}
 {{ $page.Scratch.Set "series-css-loaded" true }}
 <link rel="stylesheet" href="/css/series.css">
 {{ end }}
 
-<nav class="series-index" aria-label="Series index">
+<nav class="series-index" id="series-index-top" aria-label="Series index">
     <p class="series-index-kicker">series</p>
     <h3 class="series-index-title">{{ $title }}</h3>
     <ol class="series-index-list">
@@ -42,3 +50,12 @@
         {{ end }}
     </ol>
 </nav>
+
+{{ if gt $total 0 }}
+<div class="series-sticky" data-series-sticky hidden
+    data-current="{{ $current }}" data-total="{{ $total }}" data-title="{{ $title }}">
+    <span class="series-sticky-label">Part {{ $current }} of {{ $total }}</span>
+    <span class="series-sticky-sep" aria-hidden="true">·</span>
+    <a href="#series-index-top">{{ $title }}</a>
+</div>
+{{ end }}

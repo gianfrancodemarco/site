@@ -6,8 +6,14 @@
     {{ end }}
     <p class="home-mission">Technical writing on data systems, AI engineering, and things I build in the open.</p>
 
+    <button type="button" class="home-terminal" data-terminal-scroll="#toolbox" aria-label="Scroll to toolbox">
+        <span class="home-terminal-prompt" aria-hidden="true">$</span>
+        <span class="home-terminal-text" data-terminal-text></span>
+        <span class="home-terminal-cursor" aria-hidden="true"></span>
+    </button>
+
     {{ if isset .Site.Params "socialicons" }}
-    <div class="social-icons home-social reveal-section">
+    <div class="social-icons home-social">
         <ul class="social-icons-list">
             {{ range .Site.Params.SocialIcons }}
             <li class="social-icon">
@@ -21,7 +27,6 @@
     {{ end }}
 </section>
 
-{{- partial "now-strip.html" . -}}
 {{- partial "toolbox-strip.html" . -}}
 
 <div class="flex-break"></div>

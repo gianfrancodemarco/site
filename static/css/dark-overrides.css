@@ -214,11 +214,6 @@ html:has(#dark-theme:not([disabled])) .series-index {
   box-shadow: none;
 }
 
-html:has(#dark-theme:not([disabled])) .now-code-wrap {
-  border-color: var(--dm-border);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
-}
-
 html:has(#dark-theme:not([disabled])) .featured-card:hover,
 html:has(#dark-theme:not([disabled])) .project-card--featured:hover {
   box-shadow: 0 22px 56px rgba(0, 0, 0, 0.45);
