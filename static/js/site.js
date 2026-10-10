@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initSectionReveal();
   initHomePostReveal();
   initReadingProgress();
+  initNowTypewriter();
 });
 
 function initSectionReveal() {
@@ -54,6 +55,76 @@ function initHomePostReveal() {
       cards.forEach((el) => el.classList.add("is-visible"));
     });
   });
+}
+
+function initNowTypewriter() {
+  const strip = document.querySelector(".now-strip");
+  const source = document.querySelector(".now-code-source");
+  const highlighted = document.querySelector(".now-code-highlighted");
+  const live = document.querySelector(".now-code-live");
+  const cursor = document.querySelector(".now-cursor");
+  if (!strip || !source || !live) {
+    return;
+  }
+
+  const text = source.textContent || "";
+  const motionOk = window.matchMedia("(prefers-reduced-motion: no-preference)").matches;
+
+  const finish = (content) => {
+    if (highlighted && highlighted.innerHTML.trim()) {
+      live.innerHTML = highlighted.innerHTML;
+    } else {
+      live.textContent = content;
+    }
+    if (cursor) {
+      cursor.classList.add("is-done");
+    }
+  };
+
+  const type = () => {
+    let index = 0;
+    live.textContent = "";
+    if (cursor) {
+      cursor.classList.remove("is-done");
+    }
+
+    const step = () => {
+      if (index >= text.length) {
+        finish(text);
+        return;
+      }
+      live.textContent += text.charAt(index);
+      index += 1;
+      const delay = text.charAt(index - 1) === "\n" ? 8 : 1;
+      window.setTimeout(step, delay);
+    };
+
+    step();
+  };
+
+  if (!motionOk) {
+    finish(text);
+    return;
+  }
+
+  if (!("IntersectionObserver" in window)) {
+    type();
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          type();
+          observer.disconnect();
+        }
+      });
+    },
+    { threshold: 0.35 }
+  );
+
+  observer.observe(strip);
 }
 
 function initReadingProgress() {

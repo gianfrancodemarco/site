@@ -1,37 +1,30 @@
 {{ define "main" }}
 <section class="home-about home-intro reveal-section">
-    <div class="avatar">
-        {{ if isset .Site.Params "avatarurl" }}
-        <img class={{ .Site.Params.AvatarSize | default "size-m" }} src='{{ .Scratch.Get "avatarImgSrc" }}'
-            alt="{{ .Site.Params.AvatarAltText|default " avatar" }}" />
-        {{ end }}
-    </div>
-
     <h1>{{ .Site.Title }}</h1>
     {{ if isset .Site.Params "description" }}
     <h3 class="home-tagline">{{ .Site.Params.Description }}</h3>
     {{ end }}
     <p class="home-mission">Technical writing on data systems, AI engineering, and things I build in the open.</p>
+
+    {{ if isset .Site.Params "socialicons" }}
+    <div class="social-icons home-social reveal-section">
+        <ul class="social-icons-list">
+            {{ range .Site.Params.SocialIcons }}
+            <li class="social-icon">
+                <a href="{{ .url }}" {{ if .rel }}rel="{{ .rel }}" {{ end }} aria-label="Learn more on {{ .name }}">
+                    <img class="svg-inject" src="/svg/icons/{{ .name }}.svg" />
+                </a>
+            </li>
+            {{ end }}
+        </ul>
+    </div>
+    {{ end }}
 </section>
 
 {{- partial "now-strip.html" . -}}
 {{- partial "toolbox-strip.html" . -}}
 
 <div class="flex-break"></div>
-
-{{ if isset .Site.Params "socialicons" }}
-<section class="social-icons reveal-section">
-    <ul class="social-icons-list">
-        {{ range .Site.Params.SocialIcons }}
-        <li class="social-icon">
-            <a href="{{ .url }}" {{ if .rel }}rel="{{ .rel }}" {{ end }} aria-label="Learn more on {{ .name }}">
-                <img class="svg-inject" src="/svg/icons/{{ .name }}.svg" />
-            </a>
-        </li>
-        {{ end }}
-    </ul>
-</section>
-{{ end }}
 
 {{ if os.FileExists "index-about.md" }}
 <div class="markdown-content reveal-section">

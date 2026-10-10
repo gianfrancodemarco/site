@@ -1,4 +1,11 @@
-role: "Software Engineer, AI & Data Platform @ Nearform"
-focus: "Deep dives on data engineering, databases, and AI systems—from append-only storage to LLM tooling in production."
-learning: "Agent architectures, platform engineering, and making ML/Data workflows boringly reliable."
-updated: "January 2026"
+role:
+  title: Software Engineer
+  team: AI & Data Platform
+  company: Nearform
+focus:
+  - data engineering
+  - databases
+  - AI / LLM systems
+learning:
+  - agent architectures
+  - data & ML platforms

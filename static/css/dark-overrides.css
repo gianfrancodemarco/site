@@ -207,12 +207,16 @@ html:has(#dark-theme:not([disabled])) {
   --tech-grid: rgba(255, 255, 255, 0.035);
 }
 
-html:has(#dark-theme:not([disabled])) .now-strip-inner,
 html:has(#dark-theme:not([disabled])) .featured-card,
 html:has(#dark-theme:not([disabled])) .series-index {
   background: var(--dm-surface);
   border-color: var(--dm-border);
   box-shadow: none;
+}
+
+html:has(#dark-theme:not([disabled])) .now-code-wrap {
+  border-color: var(--dm-border);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
 }
 
 html:has(#dark-theme:not([disabled])) .featured-card:hover,

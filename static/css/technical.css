@@ -16,7 +16,6 @@ main#content {
 .section-kicker,
 .section-title,
 .featured-eyebrow,
-.now-label,
 .toolbox-chip,
 .post-date,
 .featured-card-meta {
@@ -47,60 +46,124 @@ main#content {
   margin-bottom: 0;
 }
 
-/* Now strip */
+.home-social {
+  margin-top: 1.1rem;
+  margin-bottom: 0;
+}
+
+.home-intro .social-icons-list {
+  margin-top: 0;
+}
+
+/* Now strip — Python snippet */
 .now-strip {
-  max-width: 42rem;
+  max-width: 44rem;
   margin: 1.75rem auto 0;
   padding: 0 1rem;
+  box-sizing: border-box;
+  width: 100%;
 }
 
-.now-strip-inner {
-  border: 1px solid var(--tech-border);
-  border-radius: 12px;
-  padding: 1.15rem 1.25rem;
-  background: var(--tech-surface);
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4) inset;
-}
-
-.now-grid {
-  display: grid;
-  gap: 1rem;
-  margin: 0;
-}
-
-@media (min-width: 720px) {
-  .now-grid {
-    grid-template-columns: 1fr;
-    gap: 0.85rem;
+@media (max-width: 480px) {
+  .now-code {
+    font-size: 0.72rem;
+    padding: 0.95rem 0.85rem;
   }
 }
 
-.now-item {
+.now-strip .section-kicker {
+  margin-bottom: 0.5rem;
+}
+
+.now-code-wrap {
+  border: 1px solid var(--tech-border);
+  border-radius: 12px;
+  overflow: auto;
+  background: var(--py-bg, #1e1e1e);
+  box-shadow: 0 12px 40px rgba(15, 23, 42, 0.12);
+  max-width: 100%;
+}
+
+.now-code {
   margin: 0;
-}
-
-.now-label {
-  font-size: 0.68rem;
-  letter-spacing: 0.1em;
-  text-transform: lowercase;
-  opacity: 0.6;
-  margin: 0 0 0.25rem;
-}
-
-.now-value {
-  margin: 0;
-  line-height: 1.5;
-  font-size: 0.95rem;
-}
-
-.now-updated {
-  margin: 1rem 0 0;
+  padding: 1.1rem 1.2rem 1rem;
+  overflow-x: auto;
+  font-family: var(--font-mono);
   font-size: 0.78rem;
-  opacity: 0.55;
+  line-height: 1.65;
+  tab-size: 4;
+  color: var(--py-fg, #d4d4d4);
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-wrap: anywhere;
 }
 
-.now-updated .now-label {
-  margin-right: 0.35rem;
+.now-code code {
+  font-family: inherit;
+  font-size: inherit;
+  background: transparent !important;
+  border: none;
+  padding: 0;
+}
+
+.now-code-live {
+  color: var(--py-fg, #d4d4d4);
+}
+
+.now-code .py-doc {
+  color: var(--py-comment, #6a9955);
+}
+
+.now-code .py-name {
+  color: var(--py-name, #4ec9b0);
+}
+
+.now-cursor {
+  display: inline-block;
+  margin-left: 1px;
+  color: var(--py-keyword, #569cd6);
+  animation: now-cursor-blink 1s step-end infinite;
+}
+
+.now-cursor::before {
+  content: "▋";
+}
+
+.now-cursor.is-done {
+  animation: none;
+  opacity: 0;
+}
+
+@keyframes now-cursor-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .now-cursor {
+    display: none;
+  }
+}
+
+.now-code .py-kw {
+  color: var(--py-keyword, #569cd6);
+}
+
+.now-code .py-str {
+  color: var(--py-string, #ce9178);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.now-code .py-paren {
+  color: var(--py-fg, #d4d4d4);
+}
+
+.now-code .py-comment {
+  display: block;
+  margin-top: 0.65rem;
+  color: var(--py-comment, #6a9955);
 }
 
 /* Toolbox */
@@ -191,8 +254,21 @@ a.toolbox-chip:focus-visible {
   right: 12px;
 }
 
+.featured-card-link {
+  display: block;
+  color: inherit;
+}
+
 .featured-card-media {
   height: 220px !important;
+}
+
+.featured-card--post .featured-card-body {
+  padding: 1.35rem 1.4rem 1.5rem;
+}
+
+.featured-card--post .featured-eyebrow--inset {
+  margin-bottom: 0.5rem;
 }
 
 .featured-card-body {
