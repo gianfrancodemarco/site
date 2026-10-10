@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initHeadingAnchors();
   initCodeCopyButtons();
   initSeriesSticky();
+  initExperimentalMotion();
 });
 
 function motionOk() {
@@ -158,6 +159,18 @@ function initTerminalHero() {
     const target = document.querySelector(terminal.getAttribute("data-terminal-scroll") || "#toolbox");
     target?.scrollIntoView({ behavior: motionOk() ? "smooth" : "auto", block: "start" });
   });
+
+  if (motionOk()) {
+    const scheduleGlitch = () => {
+      const wait = 8000 + Math.random() * 9000;
+      window.setTimeout(() => {
+        terminal.classList.add("is-glitch");
+        window.setTimeout(() => terminal.classList.remove("is-glitch"), 420);
+        scheduleGlitch();
+      }, wait);
+    };
+    scheduleGlitch();
+  }
 }
 
 function initGridParallax() {
@@ -253,6 +266,35 @@ function initSeriesSticky() {
 
   show();
   window.addEventListener("scroll", show, { passive: true });
+}
+
+function initExperimentalMotion() {
+  if (!motionOk()) {
+    return;
+  }
+  initToolboxMagnetic();
+}
+
+function initToolboxMagnetic() {
+  const chips = document.querySelectorAll("a.toolbox-chip");
+  if (!chips.length || window.matchMedia("(max-width: 820px)").matches) {
+    return;
+  }
+
+  chips.forEach((chip) => {
+    chip.classList.add("magnetic-hover");
+
+    chip.addEventListener("mousemove", (event) => {
+      const rect = chip.getBoundingClientRect();
+      const x = event.clientX - rect.left - rect.width / 2;
+      const y = event.clientY - rect.top - rect.height / 2;
+      chip.style.transform = `translate(${(x * 0.18).toFixed(1)}px, ${(y * 0.22).toFixed(1)}px)`;
+    });
+
+    chip.addEventListener("mouseleave", () => {
+      chip.style.transform = "";
+    });
+  });
 }
 
 function initReadingProgress() {

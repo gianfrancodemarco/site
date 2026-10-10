@@ -77,25 +77,26 @@ main#content.grid-parallax {
   top: -40%;
   height: 28%;
   pointer-events: none;
-  background: linear-gradient(
-    to bottom,
-    transparent,
-    rgba(255, 255, 255, 0.07),
-    transparent
-  );
+  background: linear-gradient(to bottom,
+      transparent,
+      rgba(255, 255, 255, 0.07),
+      transparent);
   animation: featured-scan 4.5s ease-in-out infinite;
   opacity: 0.55;
 }
 
 @keyframes featured-scan {
+
   0%,
   100% {
     transform: translateY(-120%);
     opacity: 0;
   }
+
   45% {
     opacity: 0.55;
   }
+
   55% {
     transform: translateY(320%);
     opacity: 0.35;

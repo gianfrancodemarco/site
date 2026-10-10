@@ -7,19 +7,24 @@
   max-width: 300px;
   margin: 0 25px;
   text-align: center;
-  transition: transform 0.5s ease, box-shadow 0.5s ease; /* Smoother transition for the transform and box shadow */
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+  /* Smoother transition for the transform and box shadow */
 }
 
 /* Responsive styles for smaller screens */
 @media (max-width: 1120px) {
   .card-container {
-    flex-wrap: wrap; /* Allow cards to wrap onto a new line */
-    justify-content: space-around; /* Adjust the spacing between wrapped cards */
+    flex-wrap: wrap;
+    /* Allow cards to wrap onto a new line */
+    justify-content: space-around;
+    /* Adjust the spacing between wrapped cards */
   }
 
   .card {
-    flex: 0 0 calc(50%); /* Adjust flex-basis for two cards per row */
-    max-width: calc(100%); /* Adjust max-width to account for margins */
+    flex: 0 0 calc(50%);
+    /* Adjust flex-basis for two cards per row */
+    max-width: calc(100%);
+    /* Adjust max-width to account for margins */
   }
 }
 
@@ -34,11 +39,11 @@
   margin-bottom: 10px;
 }
 
-.card:hover, .post-card:hover {
-  transform: translate(
-    -10px,
-    -10px
-  ); /* Move the card to the top left on hover */
+.card:hover,
+.post-card:hover {
+  transform: translate(-10px,
+      -10px);
+  /* Move the card to the top left on hover */
   box-shadow: 10px 10px 16px var(--light-secondary-color);
 }
 
@@ -51,15 +56,21 @@
 
 /* Remove all styles from a of project containers */
 .no-a-style {
-  color: inherit; /* Inherit the color from the parent element */
-  text-decoration: none; /* Remove underlines */
-  cursor: pointer; /* Set cursor to pointer on hover */
+  color: inherit;
+  /* Inherit the color from the parent element */
+  text-decoration: none;
+  /* Remove underlines */
+  cursor: pointer;
+  /* Set cursor to pointer on hover */
 }
 
 .no-a-style:hover {
-  color: inherit; /* Inherit the color from the parent element */
-  text-decoration: none; /* Remove underlines */
-  cursor: pointer; /* Set cursor to pointer on hover */
+  color: inherit;
+  /* Inherit the color from the parent element */
+  text-decoration: none;
+  /* Remove underlines */
+  cursor: pointer;
+  /* Set cursor to pointer on hover */
 }
 
 .list-posts .post-title {
@@ -67,11 +78,11 @@
 }
 
 .post-card {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    transition: transform 0.2s;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.2s;
 }
 
 .post-image {
@@ -90,10 +101,10 @@
 }
 
 .flex-break {
-    margin: 8px 0;
+  margin: 8px 0;
 }
 
 .post-date {
-    color: #777;
-    font-size: 0.9em;
+  color: #777;
+  font-size: 0.9em;
 }

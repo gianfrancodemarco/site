@@ -36,6 +36,7 @@ enableRobotsTXT = true
   <link rel="stylesheet" href="/css/overrides.css">
   <link rel="stylesheet" href="/css/dark-overrides.css">
   <link rel="stylesheet" href="/css/motion.css">
+  <link rel="stylesheet" href="/css/motion-experimental.css">
   <script src="/js/site.js" defer></script>
 
 
