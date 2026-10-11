@@ -1,12 +1,15 @@
+
 /* Motion pack — respects prefers-reduced-motion via JS skipping + these overrides */
 
 /* Terminal hero */
 .home-terminal {
   display: flex;
   align-items: baseline;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 0.35rem;
-  max-width: 38rem;
+  width: 38rem;
+  max-width: calc(100vw - 2rem);
+  box-sizing: border-box;
   margin: 0.85rem auto 0;
   padding: 0.55rem 0.75rem;
   font-family: var(--font-mono);
@@ -32,11 +35,16 @@
 }
 
 .home-terminal-text {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
   opacity: 0.92;
 }
 
 .home-terminal-cursor {
   display: inline-block;
+  flex-shrink: 0;
   width: 0.55em;
   color: var(--py-keyword, #569cd6);
   animation: terminal-cursor-blink 1s step-end infinite;
