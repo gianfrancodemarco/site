@@ -270,3 +270,23 @@ html:has(#dark-theme:not([disabled])) .layer-stack__item--os {
   background: color-mix(in srgb, #ea580c 10%, var(--dm-bg-elevated));
   border-color: color-mix(in srgb, #ea580c 30%, var(--dm-border));
 }
+
+html:has(#dark-theme:not([disabled])) .post-terminal {
+  background: var(--dm-bg-elevated);
+  border-color: var(--dm-border-strong);
+}
+
+html:has(#dark-theme:not([disabled])) .post-content blockquote.post-log {
+  background: var(--dm-surface);
+  border-left-color: color-mix(in srgb, #c026d3 45%, var(--dm-border));
+}
+
+html:has(#dark-theme:not([disabled])) .post-details {
+  background: var(--dm-bg-elevated);
+  border-color: var(--dm-border-strong);
+}
+
+html:has(#dark-theme:not([disabled])) .post-details pre {
+  background: var(--dm-surface) !important;
+  border-color: var(--dm-border) !important;
+}

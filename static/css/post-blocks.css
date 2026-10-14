@@ -161,3 +161,146 @@
     box-shadow: 0 8px 22px rgba(15, 23, 42, 0.08);
   }
 }
+
+/* Terminal snippets (terminal shortcode) — compact, not full-width essay blocks */
+.post-terminal {
+  margin: 1rem 0 1.25rem;
+  border-radius: 10px;
+  border: 1px solid var(--tech-border, rgba(0, 0, 0, 0.12));
+  overflow: hidden;
+  background: var(--tech-surface, rgba(0, 0, 0, 0.02));
+  max-width: 36rem;
+}
+
+.post-terminal__label {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.4rem 0.75rem;
+  border-bottom: 1px solid var(--tech-border, rgba(0, 0, 0, 0.08));
+  opacity: 0.72;
+}
+
+.post-terminal__pre {
+  margin: 0 !important;
+  padding: 0.75rem 0.85rem !important;
+  border: none !important;
+  background: transparent !important;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  overflow-x: auto;
+}
+
+.post-terminal__pre code {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  background: transparent !important;
+  padding: 0 !important;
+  border: none !important;
+  white-space: pre;
+}
+
+/* Step tables — commands inline in prose tables */
+/* Install-style tables: # | Where | Command */
+.post-content table:has(th:nth-child(3)) {
+  font-size: 0.9rem;
+}
+
+.post-content table:has(th:nth-child(3)) code {
+  font-size: 0.78rem;
+  word-break: break-word;
+}
+
+.post-content table:has(th:nth-child(3)) td:first-child {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  opacity: 0.65;
+  vertical-align: top;
+  white-space: nowrap;
+}
+
+.post-content table:has(th:nth-child(3)) td:nth-child(2) {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.78rem;
+  vertical-align: top;
+  white-space: nowrap;
+}
+
+.post-content blockquote.post-log {
+  margin: 1rem 0;
+  padding: 0.75rem 1rem;
+  border-left: 3px solid color-mix(in srgb, #c026d3 40%, var(--tech-border, #ccc));
+  background: var(--tech-surface, rgba(0, 0, 0, 0.025));
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.78rem;
+  line-height: 1.5;
+  opacity: 0.92;
+}
+
+.post-content blockquote.post-log p {
+  margin: 0.25rem 0;
+}
+
+/* Collapsible script / config (details shortcode) */
+.post-details {
+  margin: 1rem 0 1.25rem;
+  border-radius: 10px;
+  border: 1px solid var(--tech-border, rgba(0, 0, 0, 0.12));
+  background: var(--tech-surface, rgba(0, 0, 0, 0.02));
+  overflow: hidden;
+  max-width: 36rem;
+}
+
+.post-details summary {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.82rem;
+  padding: 0.65rem 0.85rem;
+  cursor: pointer;
+  list-style: none;
+  border-bottom: 1px solid transparent;
+}
+
+.post-details summary::-webkit-details-marker {
+  display: none;
+}
+
+.post-details summary::before {
+  content: "▸ ";
+  opacity: 0.55;
+}
+
+.post-details[open] summary::before {
+  content: "▾ ";
+}
+
+.post-details[open] summary {
+  border-bottom-color: var(--tech-border, rgba(0, 0, 0, 0.08));
+}
+
+.post-details__body {
+  padding: 0.65rem 0.85rem 0.85rem;
+}
+
+.post-details__body > :first-child {
+  margin-top: 0;
+}
+
+.post-details__body > :last-child {
+  margin-bottom: 0;
+}
+
+.post-details pre {
+  margin: 0 !important;
+  padding: 0.65rem 0.75rem !important;
+  border-radius: 8px !important;
+  font-size: 0.78rem !important;
+  line-height: 1.5 !important;
+  border: 1px solid var(--tech-border, rgba(0, 0, 0, 0.08)) !important;
+  background: color-mix(in srgb, Canvas 96%, transparent) !important;
+  overflow-x: auto;
+}
+
+.post-details pre code {
+  background: transparent !important;
+  padding: 0 !important;
+  font-size: inherit !important;
+}

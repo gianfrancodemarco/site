@@ -1,0 +1,5 @@
+{{- $label := .Get 0 | default "shell" -}}
+<div class="post-terminal">
+  <div class="post-terminal__label">{{ $label }}</div>
+  <pre class="post-terminal__pre"><code>{{ strings.TrimSpace .Inner }}</code></pre>
+</div>

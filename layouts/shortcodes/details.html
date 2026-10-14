@@ -1,4 +1,4 @@
-<details>
-    <summary>{{ (.Get 0) | markdownify }}</summary>
-    {{ .Inner | markdownify }}
-  </details>  
+<details class="post-details">
+  <summary>{{ (.Get 0) | markdownify }}</summary>
+  <div class="post-details__body">{{ .Inner | markdownify }}</div>
+</details>
